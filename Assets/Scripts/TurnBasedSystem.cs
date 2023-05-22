@@ -6,23 +6,16 @@ public class TurnBasedSystem : MonoBehaviour
 {
 
     [SerializeField] private enum turnPhase { START, DRAW, FREE, ATTACK, END};
-    [SerializeField] private enum playerTurn { PLAYER1, PLAYER2};
+    [SerializeField] private enum playerTurn { PLAYER1, PLAYER2 };
 
     private playerTurn actualPlayerTurn;
-    [SerializeField] private turnPhase actualPhase;
+    private turnPhase actualPhase;
     [SerializeField] private int turnNumber = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Player boards")]
+    [SerializeField] private PlayerBoard Player1Board;
+    [SerializeField] private PlayerBoard Player2Board;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void StartNewTurn()
     {
@@ -35,16 +28,18 @@ public class TurnBasedSystem : MonoBehaviour
 
     public void DrawPhase()
     {
+        actualPhase = turnPhase.DRAW;
+
         switch (actualPlayerTurn)
         {
             case playerTurn.PLAYER1:
 
-                //Pioche une carte au joueur
+                Player1Board.DrawDeckCard();
 
                 break;
             case playerTurn.PLAYER2:
 
-                //Pioche une carte à l'IA
+                Player2Board.DrawDeckCard();
 
                 break;
         }
@@ -54,6 +49,8 @@ public class TurnBasedSystem : MonoBehaviour
 
     public void FreePhase()
     {
+        actualPhase = turnPhase.FREE;
+
         switch (actualPlayerTurn)
         {
             case playerTurn.PLAYER1:
@@ -68,11 +65,13 @@ public class TurnBasedSystem : MonoBehaviour
                 break;
         }
 
-        AttackPhase()
+        AttackPhase();
     }
     
     public void AttackPhase()
     {
+        actualPhase = turnPhase.ATTACK;
+
         switch (actualPlayerTurn)
         {
             case playerTurn.PLAYER1:
