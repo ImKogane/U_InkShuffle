@@ -12,6 +12,9 @@ public class TurnBasedSystem : MonoBehaviour
     private turnPhase actualPhase;
     [SerializeField] private int turnNumber = 0;
 
+    [SerializeField] private IAPlayer gameAI;
+
+
     [Header("Player boards")]
     [SerializeField] private PlayerBoard Player1Board;
     [SerializeField] private PlayerBoard Player2Board;
@@ -60,7 +63,7 @@ public class TurnBasedSystem : MonoBehaviour
                 break;
             case playerTurn.PLAYER2:
 
-                //Action de l'IA de poser une carte
+                gameAI.PutCard();
 
                 break;
         }
@@ -82,7 +85,7 @@ public class TurnBasedSystem : MonoBehaviour
                 break;
             case playerTurn.PLAYER2:
 
-                //Attaque de l'IA
+                gameAI.Attack();
 
                 EndTurn();
                 break;
