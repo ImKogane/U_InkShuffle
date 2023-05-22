@@ -9,8 +9,10 @@ public class Card : MonoBehaviour
 
     [SerializeField]
     public CardAttributes Stats;
+    public Vector3 CardSize;
+
     private string _name;
-    private Texture _cleanImage;
+    private Material _cleanImage;
     private Texture _fullImage;
     private int _pv;
     private int _attack;
@@ -26,7 +28,7 @@ public class Card : MonoBehaviour
         get => _name;
         set => _name = value;
     }
-    public Texture CleanImage
+    public Material CleanImage
     {
         get => _cleanImage;
         set => _cleanImage = value;
@@ -62,6 +64,7 @@ public class Card : MonoBehaviour
     void Start()
     {
         Init(Stats);
+        MeshAttributes();
     }
 
     // Update is called once per frame
@@ -78,6 +81,20 @@ public class Card : MonoBehaviour
         _pv = s._pv;
         _attack = s._attack;
         _type = s._type;
+    }
+
+    private void ApplyDamage(Card c)
+    {
+        if(c != null)
+        {
+            c._pv -= _attack;
+        }
+    }
+
+    private void MeshAttributes()
+    {
+        GetComponent<Renderer>().material = _cleanImage;
+        transform.localScale = CardSize;
     }
 
     #endregion

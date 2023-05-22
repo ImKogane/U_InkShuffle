@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 438f4cf3a1f247749ac00d47ae545626, type: 3}
+  m_Name: Socko
+  m_EditorClassIdentifier: 
+  _name: Socko
+  _cleanImage: {fileID: 2100000, guid: f06b96ac3e2da9f4d8ff58c79287652e, type: 2}
+  _fullImage: {fileID: 2800000, guid: 2235ed41b332a8e48ba4a6c0e3e259c3, type: 3}
+  _pv: 2
+  _attack: 2
+  _type: 0

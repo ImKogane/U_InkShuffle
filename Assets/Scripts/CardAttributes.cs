@@ -6,7 +6,7 @@ using UnityEngine;
 public class CardAttributes : ScriptableObject
 {
     public string _name;
-    public Texture _cleanImage;
+    public Material _cleanImage;
     public Texture _fullImage;
     public int _pv;
     public int _attack;
