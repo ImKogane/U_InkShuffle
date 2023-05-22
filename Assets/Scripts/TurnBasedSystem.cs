@@ -68,7 +68,7 @@ public class TurnBasedSystem : MonoBehaviour
                 break;
         }
 
-        AttackPhase()
+        AttackPhase();
     }
     
     public void AttackPhase()

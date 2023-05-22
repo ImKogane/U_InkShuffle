@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardBase : MonoBehaviour
+public class Card : MonoBehaviour
 {
     #region Variables
 
     [SerializeField]
-    public CardStats Stats;
+    public CardAttributes Stats;
     private string _name;
     private Texture _image;
     private int _pv;
@@ -64,7 +64,7 @@ public class CardBase : MonoBehaviour
 
     }
 
-    private void Init(CardStats s)
+    private void Init(CardAttributes s)
     {
         _name = s._name;
         _image = s._image;
