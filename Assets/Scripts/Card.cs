@@ -93,8 +93,14 @@ public class Card : MonoBehaviour
 
     private void MeshAttributes()
     {
-        GetComponent<Renderer>().material = _cleanImage;
-        transform.localScale = CardSize;
+        if(_cleanImage != null)
+        {
+            GetComponent<Renderer>().material = _cleanImage;
+        }
+        if(CardSize != null)
+        {
+            transform.localScale = CardSize;
+        } 
     }
 
     #endregion
