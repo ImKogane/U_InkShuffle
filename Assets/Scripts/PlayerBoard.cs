@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class PlayerBoard : MonoBehaviour
 {
-
-    //Liste des cartes sur le board
-    //Liste des cartes en main
-    //Deck du joueur
+    public List<Card> cardsOnBoard;
+    public List<CardAttributes> cardsInHand;
+    public List<CardAttributes> cardsDeck;
     [SerializeField] private int lifePoint;
 
     // Start is called before the first frame update
