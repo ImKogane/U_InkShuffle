@@ -10,7 +10,8 @@ public class Card : MonoBehaviour
     [SerializeField]
     public CardAttributes Stats;
     private string _name;
-    private Texture _image;
+    private Texture _cleanImage;
+    private Texture _fullImage;
     private int _pv;
     private int _attack;
     public enum CardType { Normal, Special };
@@ -25,10 +26,15 @@ public class Card : MonoBehaviour
         get => _name;
         set => _name = value;
     }
-    public Texture Image
+    public Texture CleanImage
     {
-        get => _image;
-        set => _image = value;
+        get => _cleanImage;
+        set => _cleanImage = value;
+    }
+    public Texture FullImage
+    {
+        get => _fullImage;
+        set => _fullImage = value;
     }
     public int PV
     {
@@ -67,16 +73,11 @@ public class Card : MonoBehaviour
     private void Init(CardAttributes s)
     {
         _name = s._name;
-        _image = s._image;
+        _cleanImage = s._cleanImage;
+        _fullImage = s._fullImage;
         _pv = s._pv;
         _attack = s._attack;
         _type = s._type;
-
-        Debug.Log(_name);
-        Debug.Log(_image);
-        Debug.Log(_pv);
-        Debug.Log(_attack);
-        Debug.Log(_type);
     }
 
     #endregion
