@@ -30,8 +30,8 @@ namespace Mods
 				}
 				catch (Exception e)
 				{
-					Debug.Log("Could not initialize TOC for mod \"" + m_Mod.ModName + "\" for reason: " +
-					          e.Message);
+					Debug.LogWarning("Error while loading TOC file for Mod \"" + m_Mod.ModName + "\", reason: " + e.Message);
+					m_Mod.TOCScript = null;
 				}
 			}
 

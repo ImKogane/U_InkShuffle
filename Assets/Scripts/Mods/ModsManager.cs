@@ -56,7 +56,7 @@ namespace Mods
 			}
 			catch (InterpreterException e)
 			{
-				Debug.LogWarning("Error while loading lua script at : " + e.DecoratedMessage);
+				Debug.LogWarning("Error while loading lua script at \"" + fullPath + "\", reason: " + e.DecoratedMessage);
 				return false;
 			}
 		}

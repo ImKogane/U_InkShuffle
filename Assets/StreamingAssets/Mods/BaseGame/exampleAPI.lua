@@ -47,5 +47,3 @@ end
 
 print(ModName)
 ModTable.test = (ModTable.test or 0) + 1
-
-err
