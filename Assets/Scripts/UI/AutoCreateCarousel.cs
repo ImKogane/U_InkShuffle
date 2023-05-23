@@ -10,7 +10,6 @@ public class AutoCreateCarousel : MonoBehaviour
     public float slideSpacing = 10f;
 
     public List<Sprite> slideImages;
-    public List<CardAttributes> associatedScriptableObject;
 
     private void Start()
     {
@@ -29,14 +28,12 @@ public class AutoCreateCarousel : MonoBehaviour
     public void UpdateCarousel()
     {
         slideImages.Clear();
-        associatedScriptableObject.Clear();
         GameObject tempGameObject = GameObject.FindGameObjectWithTag("PlayerManager");
         PlayerBoard tempDeck = tempGameObject.GetComponent<PlayerBoard>();
         List<CardAttributes> tempList = tempDeck.cardsInHand;
         foreach (CardAttributes c in tempList)
         {
             slideImages.Add(c._fullImage);
-            associatedScriptableObject.Add(c);
         }
 
         for (int i = carouselContainer.transform.childCount - 1; i >= 0; i--)
