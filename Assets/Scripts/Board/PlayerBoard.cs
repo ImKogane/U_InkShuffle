@@ -48,8 +48,8 @@ public class PlayerBoard : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
             }
 
-            CardAttributes drawingCard = cardsDeck[0];
-            cardsInHand.Add(drawingCard);
+            cardsInHand.Add(cardsDeck[0]);
+
             cardsDeck.RemoveAt(0);
 
             if(PlayerUI != null)
@@ -57,8 +57,9 @@ public class PlayerBoard : MonoBehaviour
                 PlayerUI.UpdateCarousel();
             }
 
-            turnBasedSystem.SkipPhase();
+            
         }
+        turnBasedSystem.SkipPhase();
     }
 
     void ShuffleDeck<T>(List<T> list)
