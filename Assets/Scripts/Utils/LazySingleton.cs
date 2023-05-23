@@ -27,6 +27,11 @@ public abstract class LazySingleton<T> : MonoBehaviour where T : LazySingleton<T
         }
     }
 
+    public static bool HasValidInstance()
+    {
+        return _instance != null;
+    }
+
     protected virtual bool DestroyOnLoad => true;
 
     protected virtual void SingletonAwake() { }

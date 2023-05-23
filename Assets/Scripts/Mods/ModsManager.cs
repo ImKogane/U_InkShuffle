@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
@@ -14,35 +15,30 @@ namespace Mods
 		private readonly string _basePath = Application.streamingAssetsPath + "/Mods/";
 		private readonly string _extension = ".lua";
 		
-		private readonly SortedDictionary<string, Mod> Mods = new();
-
+		private readonly SortedDictionary<string, Mod> _mods = new();
+		
 		public event Runner OnStartDiscovery;
 		public event Runner OnEndDiscovery;
 
 		public IEnumerable<KeyValuePair<string, Mod>> EnumerateAllMods()
 		{
-			return Mods.AsEnumerable();
+			return _mods.AsEnumerable();
 		}
 		
 		public IEnumerable<KeyValuePair<string, Mod>> EnumerateEnabledMods()
 		{
-			return Mods.Where(e => e.Value.IsEnabled).AsEnumerable();
+			return _mods.Where(e => e.Value.IsEnabled).AsEnumerable();
 		}
 		
 		public IEnumerable<KeyValuePair<string, Mod>> EnumerateDisabledMods()
 		{
-			return Mods.Where(e => !e.Value.IsEnabled).AsEnumerable();
+			return _mods.Where(e => !e.Value.IsEnabled).AsEnumerable();
 		}
 
 		[CanBeNull]
 		public Mod GetMod(string modName)
 		{
-			return Mods.ContainsKey(modName) ? Mods[modName] : null;
-		}
-		
-		public int GetModsCount()
-		{
-			return Mods.Count;
+			return _mods.ContainsKey(modName) ? _mods[modName] : null;
 		}
 		
 		public bool TryDoFile(Script script, string modName, string fileName)
@@ -54,9 +50,9 @@ namespace Mods
 				script.DoString(File.ReadAllText(fullPath));
 				return true;
 			}
-			catch (InterpreterException e)
+			catch (Exception e)
 			{
-				Debug.LogWarning("Error while loading lua script at \"" + fullPath + "\", reason: " + e.DecoratedMessage);
+				Debug.LogWarning("Error while loading lua script at \"" + fullPath + "\", reason: " + e.Message);
 				return false;
 			}
 		}
@@ -71,6 +67,9 @@ namespace Mods
         
 			// Automatically register all [MoonSharpUserData] types
 			UserData.RegisterAssembly();
+
+			// we automatically discover the mods when we launch the game
+			DiscoverMods();
 		}
 
 		/**
@@ -85,7 +84,7 @@ namespace Mods
 			print("======= STARTING MOD DISCOVERY... =======");
 
 			// --> save the current enabled states so that we can reapply them
-			Dictionary<string, bool> wasEnabled = Mods.ToDictionary(entry => entry.Key, 
+			Dictionary<string, bool> wasEnabled = _mods.ToDictionary(entry => entry.Key, 
 																	entry => entry.Value.IsEnabled);
 			
 			// --> disable all current mods
@@ -93,7 +92,7 @@ namespace Mods
 			{
 				element.Value.SetModEnabled(false);
 			}
-			Mods.Clear();
+			_mods.Clear();
 			
 			// --> iterate through the Mods directory
 			DirectoryInfo dir = new DirectoryInfo(_basePath);
@@ -110,7 +109,7 @@ namespace Mods
 					if (mod.IsDiscovered)
 					{
 						// --> if the TOC file is valid, add this mod as a discovered mod
-						Mods[modName] = mod;
+						_mods[modName] = mod;
 						
 						// --> apply back the saved enabled states, for mods that are still here
 						if (wasEnabled.ContainsKey(modName))
@@ -121,14 +120,14 @@ namespace Mods
 				}
 			}
 			
-			print("======= DISCOVERED " + GetModsCount() + " MOD(S) =======");
+			print("======= DISCOVERED " + EnumerateAllMods().Count() + " MOD(S) =======");
 			
 			OnEndDiscovery?.Invoke();
 		}
 		
 		public void PrintAllMods()
 		{
-			if (GetModsCount() <= 0)
+			if (!EnumerateAllMods().Any())
 			{
 				print("======= NO MOD DISCOVERED =======");
 			}
@@ -142,8 +141,7 @@ namespace Mods
 				print("==============================");
 			}
 		}
-		
-		
+
 	}
 	
 }

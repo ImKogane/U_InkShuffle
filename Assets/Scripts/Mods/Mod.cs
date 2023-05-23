@@ -43,6 +43,9 @@ namespace Mods
 			if (!IsDiscovered)
 				return;
 			
+			if (enabled == IsEnabled)
+				return;
+			
 			if (enabled && !IsEnabled)
 			{
 				Debug.Log("------- Enable: " + ModName + " -------");
