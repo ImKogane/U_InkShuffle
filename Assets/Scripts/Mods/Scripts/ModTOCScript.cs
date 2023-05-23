@@ -11,13 +11,14 @@ namespace Mods
 
 		public class ModTOCScript : Script
 		{
-			private Mod m_Mod;
-			private TOC m_TOC;
+			public TOC Toc { get; private set; }
+			
+			private Mod _mod;
 
-			public ModTOCScript(Mod Mod)
+			public ModTOCScript(Mod mod)
 				: base(CoreModules.None)
 			{
-				m_Mod = Mod;
+				_mod = mod;
 			}
 
 			// Initialize mod TOC
@@ -25,17 +26,15 @@ namespace Mods
 			{
 				try
 				{
-					m_TOC = new TOC();
-					Call(Globals[m_Mod.ModName], m_TOC);
+					Toc = new TOC();
+					Call(Globals[_mod.ModName], Toc);
 				}
 				catch (Exception e)
 				{
-					Debug.LogWarning("Error while loading TOC file for Mod \"" + m_Mod.ModName + "\", reason: " + e.Message);
-					m_Mod.TOCScript = null;
+					Debug.LogWarning("Error while loading TOC file for Mod \"" + _mod.ModName + "\", reason: " + e.Message);
+					_mod.TOCScript = null;
 				}
 			}
-
-			public TOC GetTOC() => m_TOC;
 
 			[MoonSharpUserData]
 			public class TOC

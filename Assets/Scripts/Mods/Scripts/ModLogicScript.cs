@@ -10,12 +10,13 @@ namespace Mods
 		
 		public class ModLogicScript : Script
 		{
-			private Mod m_Mod;
+			private Mod _mod;
+			private Table _modTable; // Mod Namespace
 
-			public ModLogicScript(Mod Mod)
+			public ModLogicScript(Mod mod)
 				: base(CoreModules.Preset_SoftSandbox)
 			{
-				m_Mod = Mod;
+				_mod = mod;
 				SetupGlobals();
 			}
 		
@@ -23,9 +24,9 @@ namespace Mods
 			private void SetupGlobals()
 			{
 				// Mod Namespace
-				m_Mod.ModTable = new Table(this);
-				Globals["ModName"] = m_Mod.ModName;
-				Globals["ModTable"] = m_Mod.ModTable;
+				_modTable = new Table(this);
+				Globals["ModName"] = _mod.ModName;
+				Globals["ModTable"] = _modTable;
 				
 				// Game Namespace TODO
 				// _FullScript.Globals["GetCurrentRound"] = (Func<double>);

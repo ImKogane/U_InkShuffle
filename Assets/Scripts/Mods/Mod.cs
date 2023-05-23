@@ -1,22 +1,20 @@
-﻿using MoonSharp.Interpreter;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Mods
 {
 	public partial class Mod
 	{
-		public string ModName { get; private set; } // ID, Mod Namespace
-		public Table ModTable { get; private set; } // Mod Namespace
+		public string ModName { get; } // ID
 		
 		public ModTOCScript TOCScript { get; private set; } // ONLY ModName.lua script
 		public ModLogicScript LogicScript { get; private set; } // EVERY script the mod wanted us to load (except the TOC)
 		
-		public bool IsValid => TOCScript != null;
-		public bool IsFullyLoaded => IsValid && LogicScript != null;
+		public bool IsDiscovered => TOCScript != null;
+		public bool IsEnabled => IsDiscovered && LogicScript != null;
 
 		public Mod(string modName)
 		{
-			ModName = modName;
+			ModName = modName; // Auto-property can be made get-only
 			
 			TOCScript = new ModTOCScript(this);
 
@@ -42,17 +40,17 @@ namespace Mods
 		 */
 		public void SetModEnabled(bool enabled)
 		{
-			if (!IsValid)
+			if (!IsDiscovered)
 				return;
 			
-			if (enabled && !IsFullyLoaded)
+			if (enabled && !IsEnabled)
 			{
 				Debug.Log("------- Enable: " + ModName + " -------");
 				
 				LogicScript = new ModLogicScript(this);
 
 				// load all mod files
-				foreach (var fileName in TOCScript.GetTOC().filesToLoad)
+				foreach (var fileName in TOCScript.Toc.filesToLoad)
 				{
 					if (!ModsManager.Instance.TryDoFile(LogicScript, ModName, fileName)) // Read Logic Files
 					{
@@ -63,7 +61,7 @@ namespace Mods
 
 				LogicScript?.OnEnable();
 			}
-			else if (!enabled && IsFullyLoaded)
+			else if (!enabled && IsEnabled)
 			{
 				Debug.Log("------- Disable: " + ModName + " -------");
 				
@@ -74,7 +72,7 @@ namespace Mods
 		
 		public override string ToString()
 		{
-			return "[ModName: " + ModName + ", Enabled: \"" + IsFullyLoaded + "\", ModInfo: " + TOCScript.GetTOC().ToString() + "]";
+			return "[ModName: " + ModName + ", Enabled: \"" + IsEnabled + "\", ModInfo: " + TOCScript.Toc.ToString() + "]";
 		}
 	}
 }

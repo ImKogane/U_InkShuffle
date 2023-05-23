@@ -11,8 +11,8 @@ namespace Mods
 	
 	public class ModsManager : LazySingleton<ModsManager>
 	{
-		private readonly string BasePath = Application.streamingAssetsPath + "/Mods/";
-		private readonly string Extension = ".lua";
+		private readonly string _basePath = Application.streamingAssetsPath + "/Mods/";
+		private readonly string _extension = ".lua";
 		
 		private readonly SortedDictionary<string, Mod> Mods = new();
 
@@ -26,18 +26,18 @@ namespace Mods
 		
 		public IEnumerable<KeyValuePair<string, Mod>> EnumerateEnabledMods()
 		{
-			return Mods.Where(e => e.Value.IsFullyLoaded).AsEnumerable();
+			return Mods.Where(e => e.Value.IsEnabled).AsEnumerable();
 		}
 		
 		public IEnumerable<KeyValuePair<string, Mod>> EnumerateDisabledMods()
 		{
-			return Mods.Where(e => !e.Value.IsFullyLoaded).AsEnumerable();
+			return Mods.Where(e => !e.Value.IsEnabled).AsEnumerable();
 		}
 
 		[CanBeNull]
-		public Mod GetMod(string ModName)
+		public Mod GetMod(string modName)
 		{
-			return Mods.ContainsKey(ModName) ? Mods[ModName] : null;
+			return Mods.ContainsKey(modName) ? Mods[modName] : null;
 		}
 		
 		public int GetModsCount()
@@ -47,7 +47,7 @@ namespace Mods
 		
 		public bool TryDoFile(Script script, string modName, string fileName)
 		{
-			string fullPath = BasePath + modName + "/" + fileName + Extension;
+			string fullPath = _basePath + modName + "/" + fileName + _extension;
 			
 			try
 			{
@@ -85,8 +85,8 @@ namespace Mods
 			print("======= STARTING MOD DISCOVERY... =======");
 
 			// --> save the current enabled states so that we can reapply them
-			Dictionary<string, bool> WasEnabled = Mods.ToDictionary(entry => entry.Key, 
-																	entry => entry.Value.IsFullyLoaded);
+			Dictionary<string, bool> wasEnabled = Mods.ToDictionary(entry => entry.Key, 
+																	entry => entry.Value.IsEnabled);
 			
 			// --> disable all current mods
 			foreach (var element in EnumerateAllMods())
@@ -96,7 +96,7 @@ namespace Mods
 			Mods.Clear();
 			
 			// --> iterate through the Mods directory
-			DirectoryInfo dir = new DirectoryInfo(BasePath);
+			DirectoryInfo dir = new DirectoryInfo(_basePath);
 			if (dir.Exists)
 			{
 				foreach (DirectoryInfo addonDir in dir.EnumerateDirectories())
@@ -105,18 +105,18 @@ namespace Mods
 						continue;
 					
 					// --> if a potential mod directory is found, try to discover its TOC file
-					string ModName = addonDir.Name;
-					var Mod = new Mod(ModName);
-					if (Mod.IsValid)
+					string modName = addonDir.Name;
+					var mod = new Mod(modName);
+					if (mod.IsDiscovered)
 					{
 						// --> if the TOC file is valid, add this mod as a discovered mod
-						Mods[ModName] = Mod;
+						Mods[modName] = mod;
 						
 						// --> apply back the saved enabled states, for mods that are still here
-						if (WasEnabled.ContainsKey(ModName))
-							Mod.SetModEnabled(WasEnabled[ModName]); // keep the state before we reloaded
+						if (wasEnabled.ContainsKey(modName))
+							mod.SetModEnabled(wasEnabled[modName]); // keep the state before we reloaded
 						else
-							Mod.SetModEnabled(true); // new mod, enable it by default
+							mod.SetModEnabled(true); // new mod, enable it by default
 					}
 				}
 			}
