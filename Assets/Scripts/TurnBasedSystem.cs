@@ -19,6 +19,38 @@ public class TurnBasedSystem : MonoBehaviour
     [SerializeField] private PlayerBoard Player1Board;
     [SerializeField] private PlayerBoard Player2Board;
 
+    private void Start()
+    {
+        StartNewTurn();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            if (actualPlayerTurn == playerTurn.PLAYER1)
+            {
+                SkipPhase();
+            }
+        }
+    }
+
+
+    public void SkipPhase()
+    {
+        switch (actualPhase)
+        {
+            case turnPhase.DRAW:
+                FreePhase();
+                break;
+            case turnPhase.FREE:
+                AttackPhase();
+                break;
+            case turnPhase.ATTACK:
+                EndAttackPhase();
+                break;
+        }
+    }
 
     public void StartNewTurn()
     {
@@ -26,12 +58,15 @@ public class TurnBasedSystem : MonoBehaviour
         actualPhase = turnPhase.START;
         actualPlayerTurn = playerTurn.PLAYER1;
 
+        Debug.Log("New turn ("+turnNumber+")");
+
         DrawPhase();
     }
 
     public void DrawPhase()
     {
         actualPhase = turnPhase.DRAW;
+        Debug.Log(actualPhase + " phase - " + actualPlayerTurn);
 
         switch (actualPlayerTurn)
         {
@@ -43,16 +78,18 @@ public class TurnBasedSystem : MonoBehaviour
             case playerTurn.PLAYER2:
 
                 Player2Board.DrawDeckCard();
+                FreePhase();
 
                 break;
         }
 
-        FreePhase();
+        
     }
 
     public void FreePhase()
     {
         actualPhase = turnPhase.FREE;
+        Debug.Log(actualPhase + " phase - " + actualPlayerTurn);
 
         switch (actualPlayerTurn)
         {
@@ -64,29 +101,43 @@ public class TurnBasedSystem : MonoBehaviour
             case playerTurn.PLAYER2:
 
                 gameAI.PutCard();
+                AttackPhase();
 
                 break;
         }
 
-        AttackPhase();
+        
     }
     
     public void AttackPhase()
     {
         actualPhase = turnPhase.ATTACK;
+        Debug.Log(actualPhase + " phase - " + actualPlayerTurn);
 
         switch (actualPlayerTurn)
         {
             case playerTurn.PLAYER1:
 
                 //Debloque les actions d'attaque
-
-                NewPlayerPhase();
                 break;
             case playerTurn.PLAYER2:
 
                 gameAI.Attack();
+                EndAttackPhase();
+                break;
+        }
 
+        
+    }
+
+    public void EndAttackPhase()
+    {
+        switch (actualPlayerTurn)
+        {
+            case playerTurn.PLAYER1:
+                NewPlayerPhase();
+                break;
+            case playerTurn.PLAYER2:
                 EndTurn();
                 break;
         }
@@ -105,9 +156,10 @@ public class TurnBasedSystem : MonoBehaviour
         {
             case playerTurn.PLAYER1:
                 actualPlayerTurn = playerTurn.PLAYER2;
+                DrawPhase();
                 break;
             case playerTurn.PLAYER2:
-                actualPlayerTurn = playerTurn.PLAYER1;
+                StartNewTurn();
                 break;
         }
     }

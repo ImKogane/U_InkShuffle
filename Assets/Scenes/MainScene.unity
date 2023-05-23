@@ -156,7 +156,7 @@ MonoBehaviour:
   cardsOnBoard: []
   cardsInHand: []
   cardsDeck: []
-  lifePoint: 0
+  lifePoint: 20
 --- !u!4 &272533156
 Transform:
   m_ObjectHideFlags: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
   cardsOnBoard: []
   cardsInHand: []
   cardsDeck: []
-  lifePoint: 0
+  lifePoint: 20
 --- !u!4 &341386640
 Transform:
   m_ObjectHideFlags: 0
