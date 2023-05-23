@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Hurtook
   _cleanImage: {fileID: 2100000, guid: 21ea84c7baaf5bd4cbcdb8ffdf68a040, type: 2}
-  _fullImage: {fileID: 2800000, guid: e03b05d5f2ae5454fbecfefb555fcb99, type: 3}
+  _fullImage: {fileID: 21300000, guid: e03b05d5f2ae5454fbecfefb555fcb99, type: 3}
   _pv: 2
   _attack: 2
   _type: 0
