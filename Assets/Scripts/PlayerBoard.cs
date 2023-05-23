@@ -15,6 +15,8 @@ public class PlayerBoard : MonoBehaviour
     void Start()
     {
         turnBasedSystem = GameObject.Find("TurnManager").GetComponent<TurnBasedSystem>();
+        ShuffleDeck(cardsDeck);
+        GiveStarterCards();
     }
 
     // Update is called once per frame
@@ -23,12 +25,39 @@ public class PlayerBoard : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Draw card in deck for player hand
+    /// </summary>
     public void DrawDeckCard()
     {
-        CardAttributes drawingCard = cardsDeck[0];
-        cardsInHand.Add(drawingCard);
-        cardsDeck.RemoveAt(0);
-        turnBasedSystem.SkipPhase();
+        if(cardsDeck.Count > 0)
+        {
+            CardAttributes drawingCard = cardsDeck[0];
+            cardsInHand.Add(drawingCard);
+            cardsDeck.RemoveAt(0);
+            turnBasedSystem.SkipPhase();
+        }
     }
-    
+
+    void ShuffleDeck<T>(List<T> list)
+    {
+        int count = list.Count;
+        for (int i = 0; i < count - 1; i++)
+        {
+            int randomIndex = Random.Range(i, count);
+            T temp = list[i];
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+        }
+    }
+
+    private void GiveStarterCards()
+    {
+        for (int i = 1; i < 3; i++)
+        {
+            CardAttributes drawingCard = cardsDeck[0];
+            cardsInHand.Add(drawingCard);
+            cardsDeck.RemoveAt(0);
+        }
+    }
 }
