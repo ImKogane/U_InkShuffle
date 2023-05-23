@@ -6,6 +6,7 @@ TagManager:
   tags:
   - LifePoints
   - AttackPoints
+  - PlayerManager
   layers:
   - Default
   - TransparentFX
