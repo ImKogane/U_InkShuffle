@@ -9,18 +9,11 @@ public class AutoCreateCarousel : MonoBehaviour
     public GameObject slidePrefab;
     public float slideSpacing = 10f;
 
-    private List<Sprite> slideImages;
+    public List<Sprite> slideImages;
 
     private void Start()
     {
         UpdateCarousel();
-        foreach (Sprite slideImage in slideImages)
-        {
-            GameObject slideObject = Instantiate(slidePrefab, carouselContainer.transform);
-            Image slideImageComponent = slideObject.GetComponent<Image>();
-            slideImageComponent.sprite = slideImage;
-        }
-
         HorizontalLayoutGroup layoutGroup = carouselContainer.AddComponent<HorizontalLayoutGroup>();
         layoutGroup.spacing = slideSpacing;
         layoutGroup.childScaleWidth = true; 
@@ -33,7 +26,7 @@ public class AutoCreateCarousel : MonoBehaviour
         carouselRectTransform.anchoredPosition = Vector2.zero;
     }
 
-    public void UpdateCarousel()
+    private void UpdateCarousel()
     {
         GameObject tempGameObject = GameObject.FindGameObjectWithTag("PlayerManager");
         PlayerBoard tempDeck = tempGameObject.GetComponent<PlayerBoard>();
@@ -42,6 +35,30 @@ public class AutoCreateCarousel : MonoBehaviour
         {
             slideImages.Add(c._fullImage);
         }
+
+        for (int i = carouselContainer.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(carouselContainer.transform.GetChild(i).gameObject);
+        }
+
+        foreach (Sprite slideImage in slideImages)
+        {
+            GameObject slideObject = Instantiate(slidePrefab, carouselContainer.transform);
+            Image slideImageComponent = slideObject.GetComponent<Image>();
+            slideImageComponent.sprite = slideImage;
+        }
+    }
+
+    public void AddSlide(Sprite slideImage)
+    {
+        slideImages.Add(slideImage);
+        UpdateCarousel();
+    }
+
+    public void RemoveSlide(int index)
+    {
+        slideImages.RemoveAt(index);
+        UpdateCarousel();
     }
 
 }
