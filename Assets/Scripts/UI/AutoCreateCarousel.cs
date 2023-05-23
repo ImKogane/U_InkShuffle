@@ -13,7 +13,6 @@ public class AutoCreateCarousel : MonoBehaviour
 
     private void Start()
     {
-        UpdateCarousel();
         HorizontalLayoutGroup layoutGroup = carouselContainer.AddComponent<HorizontalLayoutGroup>();
         layoutGroup.spacing = slideSpacing;
         layoutGroup.childScaleWidth = true; 
@@ -26,8 +25,9 @@ public class AutoCreateCarousel : MonoBehaviour
         carouselRectTransform.anchoredPosition = Vector2.zero;
     }
 
-    private void UpdateCarousel()
+    public void UpdateCarousel()
     {
+        slideImages.Clear();
         GameObject tempGameObject = GameObject.FindGameObjectWithTag("PlayerManager");
         PlayerBoard tempDeck = tempGameObject.GetComponent<PlayerBoard>();
         List<CardAttributes> tempList = tempDeck.cardsInHand;
