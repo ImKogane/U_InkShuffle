@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Socko
   _cleanImage: {fileID: 2100000, guid: f06b96ac3e2da9f4d8ff58c79287652e, type: 2}
-  _fullImage: {fileID: 2800000, guid: 2235ed41b332a8e48ba4a6c0e3e259c3, type: 3}
+  _fullImage: {fileID: 21300000, guid: 2235ed41b332a8e48ba4a6c0e3e259c3, type: 3}
   _pv: 2
   _attack: 2
   _type: 0
+  _rarity: 0

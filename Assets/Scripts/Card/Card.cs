@@ -14,7 +14,7 @@ public class Card : MonoBehaviour
 
     private string _name;
     private Material _cleanImage;
-    private Texture _fullImage;
+    private Sprite _fullImage;
     private int _pv;
     private int _attack;
     public enum CardType { Normal, Special };
@@ -36,7 +36,7 @@ public class Card : MonoBehaviour
         get => _cleanImage;
         set => _cleanImage = value;
     }
-    public Texture FullImage
+    public Sprite FullImage
     {
         get => _fullImage;
         set => _fullImage = value;

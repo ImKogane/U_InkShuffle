@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1050243656}
   m_Layer: 0
   m_Name: LifePoints
-  m_TagString: Untagged
+  m_TagString: LifePoints
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '2
+  m_text: '0
 
 '
   m_isRightToLeft: 0
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 1186689794}
   m_Layer: 0
   m_Name: AttackPoints
-  m_TagString: Untagged
+  m_TagString: AttackPoints
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '1
+  m_text: '0
 
 '
   m_isRightToLeft: 0
