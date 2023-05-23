@@ -21,9 +21,18 @@ public class PlaceCard : MonoBehaviour
         if (positionsList.Count != 0)
         {
             card.GetComponent<Card>().Stats = GetComponent<SpriteLookup>().associatedScriptableObject;
+
             int randomIndex = Random.Range(0, positionsList.Count);
-            Vector3 randomPosition = positionsList[randomIndex].position;
-            Instantiate(card, randomPosition, Quaternion.identity);
+            if (positionsList[randomIndex].GetComponent<WaypointManager>().IsBusy != true ) 
+            {
+                Vector3 randomPosition = positionsList[randomIndex].position;
+                Instantiate(card, randomPosition, Quaternion.identity);
+                positionsList[randomIndex].GetComponent<WaypointManager>().IsBusy = true;
+            }
+            else
+            {
+                SpawnCardAtRandomPosition();
+            }
         }
     }
 }
