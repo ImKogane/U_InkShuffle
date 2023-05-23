@@ -376,10 +376,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1050243654, guid: c8ebcb465013d7546b1cb0825a29ee39, type: 3}
+      propertyPath: m_TagString
+      value: LifePoints
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050243656, guid: c8ebcb465013d7546b1cb0825a29ee39, type: 3}
+      propertyPath: m_text
+      value: '0
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186689792, guid: c8ebcb465013d7546b1cb0825a29ee39, type: 3}
+      propertyPath: m_TagString
+      value: AttackPoints
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186689794, guid: c8ebcb465013d7546b1cb0825a29ee39, type: 3}
+      propertyPath: m_text
+      value: '0
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 6982130422512627056, guid: c8ebcb465013d7546b1cb0825a29ee39, type: 3}
       propertyPath: Stats
       value: 
-      objectReference: {fileID: 11400000, guid: f097cdaa49468334887d4b6abf43eccb, type: 2}
+      objectReference: {fileID: 11400000, guid: 580f62adc7bd3294983d60c4f48e20ee, type: 2}
     - target: {fileID: 6982130422512627059, guid: c8ebcb465013d7546b1cb0825a29ee39, type: 3}
       propertyPath: m_RootOrder
       value: 2

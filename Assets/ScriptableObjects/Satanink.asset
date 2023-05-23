@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 438f4cf3a1f247749ac00d47ae545626, type: 3}
-  m_Name: Zombaxe
+  m_Name: Satanink
   m_EditorClassIdentifier: 
-  _name: Zombaxe
-  _cleanImage: {fileID: 2100000, guid: ca0f12890dc9aa645bac34c93435e86a, type: 2}
-  _fullImage: {fileID: 2800000, guid: 776bd0b8337b4f848852c2a35bc18a0d, type: 3}
+  _name: Satanink
+  _cleanImage: {fileID: 2100000, guid: 682b1d4a8e85bd149967fd25282ea17e, type: 2}
+  _fullImage: {fileID: 2800000, guid: 2f8aba83d5c70474da2f8d7a5bc29a15, type: 3}
   _pv: 2
-  _attack: 1
+  _attack: 2
   _type: 0

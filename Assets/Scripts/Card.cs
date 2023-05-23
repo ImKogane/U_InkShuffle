@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Card : MonoBehaviour
@@ -17,7 +18,9 @@ public class Card : MonoBehaviour
     private int _pv;
     private int _attack;
     public enum CardType { Normal, Special };
+    public enum Rarity { Common, Rare, Epic};
     private CardType _type;
+    private Rarity _rarity;
 
     #endregion
 
@@ -54,7 +57,11 @@ public class Card : MonoBehaviour
         get => _type;
         set => _type = value;
     }
-
+    public Rarity CardRarity
+    {
+        get => _rarity;
+        set => _rarity = value;
+    }
 
     #endregion
 
@@ -65,6 +72,7 @@ public class Card : MonoBehaviour
     {
         Init(Stats);
         MeshAttributes();
+        AdaptUI();
     }
 
     // Update is called once per frame
@@ -81,6 +89,7 @@ public class Card : MonoBehaviour
         _pv = s._pv;
         _attack = s._attack;
         _type = s._type;
+        _rarity = s._rarity;
     }
 
     private void ApplyDamage(Card c)
@@ -100,8 +109,35 @@ public class Card : MonoBehaviour
         if(CardSize != null)
         {
             transform.localScale = CardSize;
-        } 
+        }
     }
 
+    private void AdaptUI()
+    {
+        GameObject LifeText = FindGameObjectInChildWithTag(this.gameObject, "LifePoints");
+        if (LifeText != null)
+        {
+            LifeText.GetComponent<TMP_Text>().text = _pv.ToString();
+        }
+        GameObject AttackText = FindGameObjectInChildWithTag(this.gameObject, "AttackPoints");
+        if (AttackText != null)
+        {
+            AttackText.GetComponent<TMP_Text>().text = _attack.ToString();
+        }
+    }
+
+    private static GameObject FindGameObjectInChildWithTag(GameObject parent, string tag)
+    {
+        Transform t = parent.transform;
+
+        for (int i = 0; i < t.childCount; i++)
+        {
+            if (t.GetChild(i).gameObject.tag == tag)
+            {
+                return t.GetChild(i).gameObject;
+            }
+        }
+        return null;
+    }
     #endregion
 }

@@ -11,4 +11,5 @@ public class CardAttributes : ScriptableObject
     public int _pv;
     public int _attack;
     public Card.CardType _type;
+    public Card.Rarity _rarity;
 }
