@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerBoard : MonoBehaviour
 {
     private TurnBasedSystem turnBasedSystem;
+
     [SerializeField] private Animator deck;
+    [SerializeField] private AutoCreateCarousel PlayerUI;
 
 
     public List<Card> cardsOnBoard;
@@ -39,7 +41,7 @@ public class PlayerBoard : MonoBehaviour
             if (deck != null)
             {
                 deck.Play(0);
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(0.7f);
             }
             else
             {
@@ -49,6 +51,12 @@ public class PlayerBoard : MonoBehaviour
             CardAttributes drawingCard = cardsDeck[0];
             cardsInHand.Add(drawingCard);
             cardsDeck.RemoveAt(0);
+
+            if(PlayerUI != null)
+            {
+                PlayerUI.UpdateCarousel();
+            }
+
             turnBasedSystem.SkipPhase();
         }
     }
@@ -73,5 +81,7 @@ public class PlayerBoard : MonoBehaviour
             cardsInHand.Add(drawingCard);
             cardsDeck.RemoveAt(0);
         }
+
+        PlayerUI.UpdateCarousel();
     }
 }
