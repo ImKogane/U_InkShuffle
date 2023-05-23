@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerBoard : MonoBehaviour
 {
+    private TurnBasedSystem turnBasedSystem;
+
     public List<Card> cardsOnBoard;
     public List<CardAttributes> cardsInHand;
     public List<CardAttributes> cardsDeck;
@@ -12,7 +14,7 @@ public class PlayerBoard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        turnBasedSystem = GameObject.Find("TurnManager").GetComponent<TurnBasedSystem>();
     }
 
     // Update is called once per frame
@@ -23,7 +25,10 @@ public class PlayerBoard : MonoBehaviour
 
     public void DrawDeckCard()
     {
-
+        CardAttributes drawingCard = cardsDeck[0];
+        cardsInHand.Add(drawingCard);
+        cardsDeck.RemoveAt(0);
+        turnBasedSystem.SkipPhase();
     }
     
 }
