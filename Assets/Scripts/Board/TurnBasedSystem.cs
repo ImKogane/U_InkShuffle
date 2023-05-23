@@ -13,6 +13,7 @@ public class TurnBasedSystem : MonoBehaviour
     [SerializeField] private int turnNumber = 0;
 
     [SerializeField] private IAPlayer gameAI;
+    [SerializeField] public bool playerCanAttack;
 
 
     [Header("Player boards")]
@@ -118,7 +119,7 @@ public class TurnBasedSystem : MonoBehaviour
         {
             case playerTurn.PLAYER1:
 
-                //Debloque les actions d'attaque
+                playerCanAttack = true;
                 break;
             case playerTurn.PLAYER2:
 
@@ -135,6 +136,7 @@ public class TurnBasedSystem : MonoBehaviour
         switch (actualPlayerTurn)
         {
             case playerTurn.PLAYER1:
+                playerCanAttack = false;
                 NewPlayerPhase();
                 break;
             case playerTurn.PLAYER2:

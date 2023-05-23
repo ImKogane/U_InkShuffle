@@ -21,7 +21,6 @@ public class Card : MonoBehaviour
     public enum Rarity { Common, Rare, Epic};
     private CardType _type;
     private Rarity _rarity;
-
     #endregion
 
     #region Getter&Setter
@@ -73,6 +72,7 @@ public class Card : MonoBehaviour
         Init(Stats);
         MeshAttributes();
         AdaptUI();
+
     }
 
     // Update is called once per frame
@@ -92,11 +92,23 @@ public class Card : MonoBehaviour
         _rarity = s._rarity;
     }
 
-    private void ApplyDamage(Card c)
+
+    public void ApplyDamage(Card c)
     {
         if(c != null)
         {
+            Debug.Log(_name + " attaque " + c.Stats.name);
             c._pv -= _attack;
+
+            if(c._pv <= 0)
+            {
+                Destroy(c.gameObject);
+            }
+            else
+            {
+                c.AdaptUI();
+            }
+            
         }
     }
 
@@ -112,7 +124,7 @@ public class Card : MonoBehaviour
         }
     }
 
-    private void AdaptUI()
+    public void AdaptUI()
     {
         GameObject LifeText = FindGameObjectInChildWithTag(this.gameObject, "LifePoints");
         if (LifeText != null)

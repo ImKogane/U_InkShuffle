@@ -15,6 +15,8 @@ public class PlayerBoard : MonoBehaviour
     public List<CardAttributes> cardsDeck;
     [SerializeField] private int lifePoint;
 
+    public bool inAttackPhase;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +61,7 @@ public class PlayerBoard : MonoBehaviour
 
             
         }
+
         turnBasedSystem.SkipPhase();
     }
 
@@ -83,6 +86,9 @@ public class PlayerBoard : MonoBehaviour
             cardsDeck.RemoveAt(0);
         }
 
-        PlayerUI.UpdateCarousel();
+        if (PlayerUI != null)
+        {
+            PlayerUI.UpdateCarousel();
+        }
     }
 }
