@@ -395,6 +395,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b55c9210dcbd9d840a0d35d70389c69f, type: 2}
   - {fileID: 11400000, guid: b55c9210dcbd9d840a0d35d70389c69f, type: 2}
   lifePoint: 20
+  inAttackPhase: 0
 --- !u!4 &272533156
 Transform:
   m_ObjectHideFlags: 0
@@ -613,6 +614,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f097cdaa49468334887d4b6abf43eccb, type: 2}
   - {fileID: 11400000, guid: f097cdaa49468334887d4b6abf43eccb, type: 2}
   lifePoint: 20
+  inAttackPhase: 0
 --- !u!4 &341386640
 Transform:
   m_ObjectHideFlags: 0
@@ -754,6 +756,17 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 66a8a6e30880caa48908020cf5388217, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 762c697a92b450f42b72b636b9301dec, type: 3}
+--- !u!114 &381913413 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8249135571939600945, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
+  m_PrefabInstance: {fileID: 1188545728}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &443695930
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,6 +1507,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1567,6 +1581,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 121.744, y: 0, z: 180}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f77fef4b3e5d3b44ab2fe7b475e5cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPreview: {fileID: 381913413}
 --- !u!1 &1000143120
 GameObject:
   m_ObjectHideFlags: 0
@@ -2154,6 +2181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnNumber: 0
   gameAI: {fileID: 272533157}
+  playerCanAttack: 0
   Player1Board: {fileID: 341386639}
   Player2Board: {fileID: 272533155}
 --- !u!4 &1434273584

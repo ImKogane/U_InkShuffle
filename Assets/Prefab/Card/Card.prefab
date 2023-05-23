@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e424c6a9ec7d64ba43b532422e8b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stats: {fileID: 11400000, guid: 77ec2b79a27c4fe45add1a9df800383e, type: 2}
+  Stats: {fileID: 0}
   CardSize: {x: 0.42, y: 1, z: 0.6}
 --- !u!65 &198240998
 BoxCollider:
