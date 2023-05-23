@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using Mods;
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ModWidget : MonoBehaviour
+public class ModWidget : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private ModsMenu _modsMenu;
     private Mod _mod;
@@ -43,5 +45,17 @@ public class ModWidget : MonoBehaviour
             RefreshDisplay();
             _modsMenu.NotifyModChange();
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (HasValidMod())
+            _modsMenu?.ShowTooltip(_mod.ModName, _mod.TOCScript.Toc.ToTooltipString());
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (HasValidMod())
+            _modsMenu?.HideTooltip(_mod.ModName);
     }
 }

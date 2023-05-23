@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MoonSharp.Interpreter;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Mods
@@ -48,6 +49,19 @@ namespace Mods
 				public override string ToString()
 				{
 					return "[Title: \"" + title + "\", Version \"" + version + "\", Author: \"" + author + "\"]";
+				}
+				
+				public string ToTooltipString()
+				{
+					string tooltip = "";
+					
+					tooltip += "Title: " + title.Truncate(56) + "\n";
+					tooltip += "Notes: " + notes + "\n";
+					tooltip += "Version: " + version + "\n";
+					tooltip += "Author: " + author + "\n";
+					tooltip += "Files to load: " + filesToLoad.Count + "\n";
+
+					return tooltip;
 				}
 			}
 

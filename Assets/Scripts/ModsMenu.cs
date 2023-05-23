@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Mods;
 using TMPro;
@@ -12,6 +13,37 @@ namespace DefaultNamespace
 		public GameObject ModsListParent;
 		public GameObject ModWidgetPrefab;
 		public TextMeshProUGUI ModsCountText;
+		public GameObject TooltipGO;
+		private RectTransform _tooltipBackground;
+		private List<TextMeshProUGUI> _tooltipTexts;
+		private string _tooltipCurrentOwner;
+		private string _tooltipToUpdate;
+
+		private void Start()
+		{
+			if (TooltipGO != null)
+			{
+				TooltipGO.SetActive(false);
+				_tooltipTexts = TooltipGO.GetComponentsInChildren<TextMeshProUGUI>().ToList();
+				_tooltipBackground = TooltipGO.GetComponentInChildren<Image>().gameObject.GetComponent<RectTransform>();
+			}
+		}
+
+		public void ShowTooltip(string modName, string text)
+		{
+			_tooltipCurrentOwner = modName;
+			TooltipGO?.SetActive(true);
+			_tooltipToUpdate = text;
+		}
+		
+		public void HideTooltip(string modName)
+		{
+			if (modName == _tooltipCurrentOwner)
+			{
+				TooltipGO?.SetActive(false);
+				_tooltipCurrentOwner = "";
+			}
+		}
 
 		private void OnEnable()
 		{
@@ -59,6 +91,32 @@ namespace DefaultNamespace
 			// misc changes
 			NotifyModChange();
 		}
-		
+
+		private void Update()
+		{
+			if (_tooltipToUpdate != "")
+			{
+				// bc it takes one frame for unity to update the text/width/position accordingly, I have to do it like this
+				TooltipGO.transform.position = new Vector3(10000, 0, 0);
+				_tooltipTexts.ForEach(t => t.SetText(_tooltipToUpdate));
+				_tooltipToUpdate = "";
+				return;
+			}
+			
+			RefreshTooltipPosition();
+		}
+
+		private void RefreshTooltipPosition()
+		{
+			if (TooltipGO != null)
+			{
+				if (TooltipGO.activeInHierarchy)
+				{
+					Vector2 size = Vector2.Scale(_tooltipBackground.rect.size, _tooltipBackground.lossyScale); // RectTransform to screen space
+					float width = (new Rect((Vector2) _tooltipBackground.position - (size * 0.5f), size)).width;
+					TooltipGO.transform.position = Input.mousePosition + new Vector3((width / 2.0f) + 20, 0, 0);
+				}
+			}
+		}
 	}
 }
