@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerBoard : MonoBehaviour
 {
     private TurnBasedSystem turnBasedSystem;
+    [SerializeField] private Animator deck;
+
 
     public List<Card> cardsOnBoard;
     public List<CardAttributes> cardsInHand;
@@ -15,6 +17,7 @@ public class PlayerBoard : MonoBehaviour
     void Start()
     {
         turnBasedSystem = GameObject.Find("TurnManager").GetComponent<TurnBasedSystem>();
+
         ShuffleDeck(cardsDeck);
         GiveStarterCards();
     }
@@ -28,10 +31,21 @@ public class PlayerBoard : MonoBehaviour
     /// <summary>
     /// Draw card in deck for player hand
     /// </summary>
-    public void DrawDeckCard()
+    public IEnumerator DrawDeckCard()
     {
         if(cardsDeck.Count > 0)
         {
+            
+            if (deck != null)
+            {
+                deck.Play(0);
+                yield return new WaitForSeconds(1);
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.1f);
+            }
+
             CardAttributes drawingCard = cardsDeck[0];
             cardsInHand.Add(drawingCard);
             cardsDeck.RemoveAt(0);

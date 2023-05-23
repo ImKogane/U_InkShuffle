@@ -72,13 +72,13 @@ public class TurnBasedSystem : MonoBehaviour
         {
             case playerTurn.PLAYER1:
 
-                Player1Board.DrawDeckCard();
+                StartCoroutine(Player1Board.DrawDeckCard());
+
 
                 break;
             case playerTurn.PLAYER2:
 
-                Player2Board.DrawDeckCard();
-                FreePhase();
+                StartCoroutine(Player2Board.DrawDeckCard());
 
                 break;
         }
