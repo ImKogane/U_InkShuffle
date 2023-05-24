@@ -24,6 +24,15 @@ public class IAPlayer : MonoBehaviour
 
     public void Attack()
     {
+        foreach (Card card in ownBoard.cardsOnBoard)
+        {
+            if(card.canAttack) 
+            {
+                Card randomTarget = playerBoard.cardsOnBoard[Random.Range(0, playerBoard.cardsOnBoard.Count)];
+                card.ApplyDamage(randomTarget);
+            }
+        }
+        
 
     }
 

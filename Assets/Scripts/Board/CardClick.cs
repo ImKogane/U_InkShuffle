@@ -50,8 +50,19 @@ public class CardClick : MonoBehaviour
                         {
                             if (originAttack is null)
                             {
-                                originAttack = tempCard;
-                                Debug.Log("Select target");
+                                if (tempCard.Side == Card.cardSide.PlayerCard)
+                                {
+                                    if (tempCard.canAttack)
+                                    {
+                                        originAttack = tempCard;
+                                        Debug.Log("Select target");
+                                    }
+                                    else
+                                    {
+                                        Debug.Log("Cette carte ne peux pas/plus attaquer !");
+                                    }
+                                }
+                                
                             }
                             else
                             {
@@ -59,16 +70,12 @@ public class CardClick : MonoBehaviour
                                 {
                                     if(tempCard.Side == Card.cardSide.AICard)
                                     {
-                                        target = tempCard;
-                                        originAttack.ApplyDamage(target);
+                                            target = tempCard;
+                                            originAttack.ApplyDamage(target);
 
-                                        target = null;
-                                        originAttack = null;
-                                    }
-                                    else
-                                    {
-                                        Debug.Log("Tu t'attaque toi-même !");
-                                        ResetAttack();
+                                            target = null;
+                                            originAttack = null;
+                                        
                                     }
                                     
                                 }

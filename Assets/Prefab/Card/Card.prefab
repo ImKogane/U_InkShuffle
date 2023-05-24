@@ -377,7 +377,7 @@ Transform:
   m_GameObject: {fileID: 6982130422512627063}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.494219, y: -7.716958, z: -2.7264204}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.42, y: 1, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1050243655}
@@ -447,8 +447,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e424c6a9ec7d64ba43b532422e8b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stats: {fileID: 0}
+  Stats: {fileID: 11400000, guid: 45b1484bcbb4d564c9d3e131709eec7c, type: 2}
   CardSize: {x: 0.42, y: 1, z: 0.6}
+  actualCardSide: 0
+  canAttack: 1
 --- !u!65 &198240998
 BoxCollider:
   m_ObjectHideFlags: 0

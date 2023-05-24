@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 public class TurnBasedSystem : MonoBehaviour
@@ -58,6 +59,8 @@ public class TurnBasedSystem : MonoBehaviour
         turnNumber++;
         actualPhase = turnPhase.START;
         actualPlayerTurn = playerTurn.PLAYER1;
+
+        ResetCardAttack();
 
         Debug.Log("New turn ("+turnNumber+")");
 
@@ -164,6 +167,20 @@ public class TurnBasedSystem : MonoBehaviour
                 StartNewTurn();
                 break;
         }
+    }
+
+    private void ResetCardAttack()
+    {
+        Debug.Log("Reset card attack");
+        foreach (Card card in Player1Board.cardsOnBoard)
+        {
+            card.canAttack = true;
+        }
+        foreach (Card card in Player2Board.cardsOnBoard)
+        {
+            card.canAttack = true;
+        }
+
     }
 
 }

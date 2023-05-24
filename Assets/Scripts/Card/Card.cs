@@ -27,6 +27,8 @@ public class Card : MonoBehaviour
     private Rarity _rarity;
     private cardSide _actualCardSide;
 
+    public bool canAttack;
+
     #endregion
 
     #region Getter&Setter
@@ -117,6 +119,7 @@ public class Card : MonoBehaviour
         {
             Debug.Log(_name + " attaque " + c.Stats.name);
             c._pv -= _attack;
+            canAttack = false;
 
             if(c._pv <= 0)
             {
