@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 438f4cf3a1f247749ac00d47ae545626, type: 3}
+  m_Name: Zombaxe
+  m_EditorClassIdentifier: 
+  _name: Zombaxe
+  _cleanImage: {fileID: 2100000, guid: ca0f12890dc9aa645bac34c93435e86a, type: 2}
+  _fullImage: {fileID: 21300000, guid: 776bd0b8337b4f848852c2a35bc18a0d, type: 3}
+  _pv: 2
+  _attack: 1
+  _type: 0
+  _rarity: 0

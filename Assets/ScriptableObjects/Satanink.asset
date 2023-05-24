@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 438f4cf3a1f247749ac00d47ae545626, type: 3}
+  m_Name: Satanink
+  m_EditorClassIdentifier: 
+  _name: Satanink
+  _cleanImage: {fileID: 2100000, guid: 682b1d4a8e85bd149967fd25282ea17e, type: 2}
+  _fullImage: {fileID: 21300000, guid: 2f8aba83d5c70474da2f8d7a5bc29a15, type: 3}
+  _pv: 2
+  _attack: 2
+  _type: 0
+  _rarity: 0
