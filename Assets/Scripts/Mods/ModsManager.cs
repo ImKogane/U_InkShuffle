@@ -21,14 +21,10 @@ namespace Mods
 			return _mods.Values.AsEnumerable();
 		}
 		
-		public IEnumerable<Mod> EnumerateEnabledMods()
+		// Code candy
+		public IEnumerable<Mod> EnumerateEnabledMods(bool isEnabled = true)
 		{
-			return _mods.Values.Where(mod => mod.IsEnabled).AsEnumerable();
-		}
-		
-		public IEnumerable<Mod> EnumerateDisabledMods()
-		{
-			return _mods.Values.Where(mod => !mod.IsEnabled).AsEnumerable();
+			return EnumerateAllMods().Where(mod => mod.IsEnabled == isEnabled);
 		}
 
 		[CanBeNull]
@@ -69,9 +65,7 @@ namespace Mods
 			
 			// --> disable all current mods
 			foreach (var mod in EnumerateAllMods())
-			{
 				mod.SetModEnabled(false);
-			}
 			_mods.Clear();
 			
 			// --> iterate through the Mods directory
@@ -104,24 +98,6 @@ namespace Mods
 			
 			OnEndDiscovery?.Invoke();
 		}
-		
-		public void PrintAllMods()
-		{
-			if (!EnumerateAllMods().Any())
-			{
-				print("======= NO MOD DISCOVERED =======");
-			}
-			else
-			{
-				print("======= DISCOVERED MODS: =======");
-				foreach (var mod in EnumerateAllMods())
-				{
-					print(mod.ToString());
-				}
-				print("==============================");
-			}
-		}
-
 	}
 	
 }

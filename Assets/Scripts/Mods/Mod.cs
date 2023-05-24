@@ -28,12 +28,6 @@ namespace Mods
 			TOCScript?.Initialize();
 		}
 
-		public void ReloadModLogic()
-		{
-			SetModEnabled(false);
-			SetModEnabled(true);
-		}
-
 		/// <summary>
 		/// Enable/Disable the mod.<br/><br/>
 		/// NOTE #1: Enabling a disabled mod will reload the Logic files from the disk!<br/><br/>
@@ -73,6 +67,12 @@ namespace Mods
 				TryCall("OnModDisabled");
 				LogicScript = null;
 			}
+		}
+		
+		public void ReloadModLogic()
+		{
+			SetModEnabled(false);
+			SetModEnabled(true);
 		}
 		
 		public override string ToString()

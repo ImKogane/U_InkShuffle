@@ -1,3 +1,4 @@
+using System.Linq;
 using Mods;
 using UnityEngine;
 
@@ -11,10 +12,21 @@ public class Tests : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            ModsManager.Instance.PrintAllMods();
+            if (!ModsManager.Instance.EnumerateAllMods().Any())
+            {
+                print("======= NO MOD DISCOVERED =======");
+            }
+            else
+            {
+                print("======= DISCOVERED MODS: =======");
+                foreach (var mod in ModsManager.Instance.EnumerateAllMods())
+                {
+                    print(mod.ToString());
+                }
+                print("==============================");
+            }
         }
         
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -34,12 +46,7 @@ public class Tests : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            print(ModsManager.Instance.GetMod("BaseGame")?.LogicScript.Globals.Get("HelloTest"));
-            // foreach (var mod in ModsManager.Instance.EnumerateEnabledMods())
-            // {
-            //     mod.LogicScript.
-            //     mod.TryRunner(() => mod.LogicScript.Call(mod.LogicScript.Globals.Get("OnEndRound")));
-            // }
+            print(ModsManager.Instance.GetMod("BaseGame")?.TryGet("HelloTest"));
         }
     }
     
