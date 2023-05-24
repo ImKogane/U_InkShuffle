@@ -24,12 +24,12 @@ public class PlaceCard : MonoBehaviour
 
     public void SpawnCardAtRandomPosition()
     {
-        if(turnBasedSystem.playerCanPutCard)
+        bool allTrue = CheckAllBooleansTrue();
+        if (!allTrue)
         {
-            bool allTrue = CheckAllBooleansTrue();
-            if (!allTrue)
+            if (positionsList.Count != 0)
             {
-                if (positionsList.Count != 0)
+                if (turnBasedSystem.playerCanPutCard)
                 {
                     card.GetComponent<Card>().Stats = GetComponent<SpriteLookup>().associatedScriptableObject;
 
@@ -39,13 +39,13 @@ public class PlaceCard : MonoBehaviour
                         Vector3 randomPosition = positionsList[randomIndex].position;
                         GameObject placedCard = Instantiate(card, randomPosition, Quaternion.identity);
                         positionsList[randomIndex].GetComponent<WaypointManager>().IsBusy = true;
-                        if (placedCard.GetComponent<Card>() != null)
+                        if (placedCard.GetComponent<Card>() != null && placedCard.GetComponent<Card>().Placed == false)
                         {
                             placedCard.GetComponent<Card>().Placed = true;
                             placedCard.GetComponent<Card>().Side = Card.cardSide.PlayerCard;
+                            ClearDeckHand(placedCard);
                         }
                         turnBasedSystem.playerCanPutCard = false;
-                        ClearDeckHand(placedCard);
                     }
                     else
                     {
@@ -53,12 +53,7 @@ public class PlaceCard : MonoBehaviour
                     }
                 }
             }
-            else
-            {
-                return;
-            }
         }
-        else { return; }
     }
 
     private bool CheckAllBooleansTrue()
@@ -90,6 +85,7 @@ public class PlaceCard : MonoBehaviour
                     tempListBoard.Add(g.GetComponent<Card>());
                     AutoCreateCarousel tempUI = FindObjectOfType<AutoCreateCarousel>();
                     tempUI.UpdateCarousel();
+                    break;
                 }
             }
         }

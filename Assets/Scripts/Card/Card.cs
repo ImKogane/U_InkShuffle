@@ -188,6 +188,7 @@ public class Card : MonoBehaviour
                 {
                     tempListBoard.RemoveAt(i);
                     Destroy(card.gameObject);
+                    break;
                 }
             }
                 
