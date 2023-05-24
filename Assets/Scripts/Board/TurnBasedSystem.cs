@@ -110,26 +110,20 @@ public class TurnBasedSystem : MonoBehaviour
     public IEnumerator FreePhase()
     {
         actualPhase = turnPhase.FREE;
-        if (actualPlayerTurn == playerTurn.PLAYER1)
-        {
-            StartCoroutine(UpdateText("FREE PHASE"));
-            yield return new WaitForSeconds(2.1f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(0.5f);
-        }
-
-        
 
         switch (actualPlayerTurn)
         {
             case playerTurn.PLAYER1:
 
+                StartCoroutine(UpdateText("FREE PHASE"));
+                yield return new WaitForSeconds(2.1f);
+
                 playerCanPutCard = true;
 
                 break;
             case playerTurn.PLAYER2:
+
+                yield return new WaitForSeconds(0.5f);
 
                 gameAI.PutCard();
                 StartCoroutine(AttackPhase());
@@ -144,28 +138,41 @@ public class TurnBasedSystem : MonoBehaviour
     {
         actualPhase = turnPhase.ATTACK;
 
-        if (actualPlayerTurn == playerTurn.PLAYER1)
-        {
-            StartCoroutine(UpdateText("ATTACK PHASE"));
-            yield return new WaitForSeconds(2.1f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(0.5f);
-        }
 
         switch (actualPlayerTurn)
         {
             case playerTurn.PLAYER1:
 
-                playerCanAttack = true;
-                playerCanPutCard = false;
+                if(Player1Board.cardsOnBoard.Count > 0)
+                {
+                    StartCoroutine(UpdateText("ATTACK PHASE"));
+                    yield return new WaitForSeconds(2.1f);
+
+                    playerCanAttack = true;
+                    playerCanPutCard = false;
+                }
+                else
+                {
+                    yield return new WaitForSeconds(0.1f);
+                    SkipPhase();
+                }
 
                 break;
             case playerTurn.PLAYER2:
 
-                gameAI.Attack();
-                EndAttackPhase();
+                if (Player2Board.cardsOnBoard.Count > 0)
+                {
+                    yield return new WaitForSeconds(0.5f);
+
+                    gameAI.Attack();
+                    EndAttackPhase();
+                }
+                else
+                {
+                    yield return new WaitForSeconds(0.1f);
+                    SkipPhase();
+                }
+
                 break;
         }
 
