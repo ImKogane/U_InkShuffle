@@ -71,7 +71,7 @@ public class CardClick : MonoBehaviour
                                     if(tempCard.Side == Card.cardSide.AICard)
                                     {
                                             target = tempCard;
-                                            originAttack.ApplyDamage(target);
+                                            originAttack.ApplyDamage(target, "PlayerManager");
 
                                             target = null;
                                             originAttack = null;

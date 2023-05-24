@@ -9,6 +9,8 @@ TagManager:
   - PlayerManager
   - PlayerCardPlaces
   - IACardPlaces
+  - Card
+  - IAManager
   layers:
   - Default
   - TransparentFX

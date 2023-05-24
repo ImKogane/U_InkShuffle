@@ -112,7 +112,7 @@ public class Card : MonoBehaviour
     }
 
 
-    public void ApplyDamage(Card c)
+    public void ApplyDamage(Card c, string tag)
     {
         if(c != null)
         {
@@ -122,7 +122,7 @@ public class Card : MonoBehaviour
 
             if(c._pv <= 0)
             {
-                Destroy(c.gameObject);
+                ClearBoard(c, tag);
             }
             else
             {
@@ -170,6 +170,30 @@ public class Card : MonoBehaviour
             }
         }
         return null;
+    }
+
+    private void ClearBoard(Card card, string tag)
+    {
+        GameObject tempGameObject = GameObject.FindGameObjectWithTag(tag);
+        PlayerBoard tempDeck = tempGameObject.GetComponent<PlayerBoard>();
+        List<Card> tempListBoard = tempDeck.cardsOnBoard;
+        if (card.Placed == true)
+        {
+            for (int i = 0; i < tempListBoard.Count; ++i)
+            {
+                if (tempListBoard[i] == card)
+                {
+                    Debug.Log("Identiques");
+                    tempListBoard.RemoveAt(i);
+                    Destroy(tempListBoard[i].gameObject);
+                }
+                else
+                {
+                    Debug.Log("Différents");
+                }
+            }
+                
+        }
     }
     #endregion
 }

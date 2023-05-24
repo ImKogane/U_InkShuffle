@@ -31,18 +31,15 @@ public class IAPlayer : MonoBehaviour
                 if(playerBoard.cardsOnBoard.Count > 0)
                 {
                     Card randomTarget = playerBoard.cardsOnBoard[Random.Range(0, playerBoard.cardsOnBoard.Count)];
-                    card.ApplyDamage(randomTarget);
+                    card.ApplyDamage(randomTarget, "IAManager");
                     Debug.Log("Attaque de l'IA");
                 }
                 else
                 {
                     Debug.Log("Attaque du joueur");
                 }
-                
             }
-        }
-        
-
+        }  
     }
 
     public void PutCard()
