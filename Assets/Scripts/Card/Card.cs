@@ -110,6 +110,7 @@ public class Card : MonoBehaviour
         _attack = s._attack;
         _type = s._type;
         _rarity = s._rarity;
+
     }
 
 
@@ -121,7 +122,8 @@ public class Card : MonoBehaviour
             target._pv -= _attack;
             canAttack = false;
 
-            if(target._pv <= 0)
+
+            if (target._pv <= 0)
             {
                 target.ClearBoard(target, tag);
             }
@@ -194,5 +196,27 @@ public class Card : MonoBehaviour
                 
         }
     }
+
+    #region Animations
+        public void PlayAnimError()
+        {
+            Animator animator = GetComponent<Animator>();
+
+            if(animator != null)
+            {
+                animator.SetTrigger("Error");
+            }
+        }
+
+        public void PlayAnimAttack()
+        {
+            Animator animator = GetComponent<Animator>();
+
+            if (animator != null)
+            {
+                animator.SetTrigger("Attack");
+            }
+        }
+        #endregion
     #endregion
 }

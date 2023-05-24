@@ -61,6 +61,7 @@ public class CardClick : MonoBehaviour
 
                                         if(enemyBoard != null && enemyBoard.cardsOnBoard.Count <= 0)
                                         {
+                                            tempCard.PlayAnimAttack();
                                             enemyBoard.TakeDamage(originAttack.Stats._attack);
 
                                             //Reset
@@ -71,6 +72,7 @@ public class CardClick : MonoBehaviour
                                     }
                                     else
                                     {
+                                        tempCard.PlayAnimError();
                                         Debug.Log("Cette carte ne peux pas/plus attaquer !");
                                     }
                                 }
@@ -82,6 +84,7 @@ public class CardClick : MonoBehaviour
                                 {
                                     if(tempCard.Side == Card.cardSide.AICard)
                                     {
+                                            originAttack.PlayAnimAttack();
                                             target = tempCard;
                                             originAttack.ApplyDamage(target, "IAManager");
 
