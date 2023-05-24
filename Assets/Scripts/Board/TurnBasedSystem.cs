@@ -223,7 +223,6 @@ public class TurnBasedSystem : MonoBehaviour
 
     private void ResetCardAttack()
     {
-        Debug.Log("Reset card attack");
         foreach (Card card in Player1Board.cardsOnBoard)
         {
             card.canAttack = true;

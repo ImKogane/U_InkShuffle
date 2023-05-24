@@ -112,21 +112,21 @@ public class Card : MonoBehaviour
     }
 
 
-    public void ApplyDamage(Card c, string tag)
+    public void ApplyDamage(Card target, string tag)
     {
-        if(c != null)
+        if(target != null)
         {
-            Debug.Log(_name + " attaque " + c.Stats.name);
-            c._pv -= _attack;
+            Debug.Log(_name + " attaque " + target.Stats.name);
+            target._pv -= _attack;
             canAttack = false;
 
-            if(c._pv <= 0)
+            if(target._pv <= 0)
             {
-                c.ClearBoard(c, tag);
+                target.ClearBoard(target, tag);
             }
             else
             {
-                c.AdaptUI();
+                target.AdaptUI();
             }
             
         }
@@ -177,8 +177,10 @@ public class Card : MonoBehaviour
         GameObject tempGameObject = GameObject.FindGameObjectWithTag(tag);
         PlayerBoard tempDeck = tempGameObject.GetComponent<PlayerBoard>();
         List<Card> tempListBoard = tempDeck.cardsOnBoard;
+
         if (card.Placed == true)
         {
+            Debug.Log("DESTROY TA MERE");
             for (int i = 0; i < tempListBoard.Count; ++i)
             {
                 if (tempListBoard[i] == card)

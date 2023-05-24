@@ -65,8 +65,10 @@ public class IAPlayer : MonoBehaviour
 
                     if (placedCard.GetComponent<Card>() != null)
                     {
+                        placedCard.GetComponent<Card>().Placed = true;
                         placedCard.GetComponent<Card>().Side = Card.cardSide.AICard;
                         ownBoard.cardsOnBoard.Add(placedCard.GetComponent<Card>());
+                        
                     }
 
                 }
