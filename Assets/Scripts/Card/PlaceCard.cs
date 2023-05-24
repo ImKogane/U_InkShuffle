@@ -32,8 +32,10 @@ public class PlaceCard : MonoBehaviour
                 if (positionsList[randomIndex].GetComponent<WaypointManager>().IsBusy != true)
                 {
                     Vector3 randomPosition = positionsList[randomIndex].position;
-                    Instantiate(card, randomPosition, Quaternion.identity);
+                    GameObject placedCard = Instantiate(card, randomPosition, Quaternion.identity);
                     positionsList[randomIndex].GetComponent<WaypointManager>().IsBusy = true;
+
+                    if(placedCard.GetComponent<Card>() != null) placedCard.GetComponent<Card>().actualCardSide = Card.cardSide.PLAYERCARD;
                     ClearDeckHand();
                 }
                 else
