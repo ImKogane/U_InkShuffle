@@ -8,8 +8,8 @@ public class PlaceCard : MonoBehaviour
 {
     public GameObject card;
     public List<Transform> positionsList;
-
     private TurnBasedSystem turnBasedSystem;
+
 
     private void Start()
     {
