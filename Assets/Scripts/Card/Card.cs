@@ -17,13 +17,15 @@ public class Card : MonoBehaviour
     private Sprite _fullImage;
     private int _pv;
     private int _attack;
+    [SerializeField]
+    private bool _isPlaced;
     public enum CardType { Normal, Special };
     public enum Rarity { Common, Rare, Epic};
+    public enum cardSide { PlayerCard, AICard };
+
     private CardType _type;
     private Rarity _rarity;
-
-    [SerializeField] public enum cardSide { PLAYERCARD, AICARD };
-    public cardSide actualCardSide;
+    private cardSide _actualCardSide;
 
     #endregion
 
@@ -55,6 +57,12 @@ public class Card : MonoBehaviour
         set => _attack = value;
     }
 
+    public bool Placed
+    {
+        get => _isPlaced;
+        set => _isPlaced = value;
+    }
+
     public CardType Type
     {
         get => _type;
@@ -64,6 +72,12 @@ public class Card : MonoBehaviour
     {
         get => _rarity;
         set => _rarity = value;
+    }
+
+    public cardSide Side
+    {
+        get => _actualCardSide;
+        set => _actualCardSide = value;
     }
 
     #endregion

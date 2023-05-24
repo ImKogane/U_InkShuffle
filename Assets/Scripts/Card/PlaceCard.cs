@@ -35,9 +35,12 @@ public class PlaceCard : MonoBehaviour
                     Vector3 randomPosition = positionsList[randomIndex].position;
                     GameObject placedCard = Instantiate(card, randomPosition, Quaternion.identity);
                     positionsList[randomIndex].GetComponent<WaypointManager>().IsBusy = true;
-
-                    if(placedCard.GetComponent<Card>() != null) placedCard.GetComponent<Card>().actualCardSide = Card.cardSide.PLAYERCARD;
-                    ClearDeckHand();
+                    if (placedCard.GetComponent<Card>() != null)
+                    {
+                        placedCard.GetComponent<Card>().Placed = true;
+                        placedCard.GetComponent<Card>().Side = Card.cardSide.PlayerCard;
+                    }
+                    ClearDeckHand(placedCard);
                 }
                 else
                 {
@@ -64,18 +67,23 @@ public class PlaceCard : MonoBehaviour
         return true;
     }
 
-    private void ClearDeckHand()
+    private void ClearDeckHand(GameObject g)
     {
         GameObject tempGameObject = GameObject.FindGameObjectWithTag("PlayerManager");
         PlayerBoard tempDeck = tempGameObject.GetComponent<PlayerBoard>();
-        List<CardAttributes> tempList = tempDeck.cardsInHand;
-        for (int i = 0; i < tempList.Count - 1; ++i)
+        List<CardAttributes> tempListHand = tempDeck.cardsInHand;
+        List<Card> tempListBoard = tempDeck.cardsOnBoard;
+        if (g.GetComponent<Card>().Placed == true)
         {
-            if (tempList[i] == GetComponent<SpriteLookup>().associatedScriptableObject)
+            for (int i = 0; i < tempListHand.Count; ++i)
             {
-                tempList.RemoveAt(i);
-                AutoCreateCarousel tempUI = FindObjectOfType<AutoCreateCarousel>();
-                tempUI.UpdateCarousel();
+                if (tempListHand[i] == GetComponent<SpriteLookup>().associatedScriptableObject)
+                {
+                    tempListHand.RemoveAt(i);
+                    tempListBoard.Add(g.GetComponent<Card>());
+                    AutoCreateCarousel tempUI = FindObjectOfType<AutoCreateCarousel>();
+                    tempUI.UpdateCarousel();
+                }
             }
         }
     }

@@ -48,7 +48,7 @@ public class IAPlayer : MonoBehaviour
                     points[randomPosIndex].GetComponent<WaypointManager>().IsBusy = true;
                     ownBoard.cardsInHand.RemoveAt(randCardIndex);
 
-                    if (placedCard.GetComponent<Card>() != null) placedCard.GetComponent<Card>().actualCardSide = Card.cardSide.AICARD;
+                    if (placedCard.GetComponent<Card>() != null) placedCard.GetComponent<Card>().Side = Card.cardSide.AICard;
 
                 }
                 else
