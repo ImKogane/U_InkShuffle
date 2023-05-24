@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerBoard : MonoBehaviour
@@ -9,18 +10,24 @@ public class PlayerBoard : MonoBehaviour
     [SerializeField] private Animator deck;
     [SerializeField] private AutoCreateCarousel PlayerUI;
 
+    public bool inAttackPhase;
 
     public List<Card> cardsOnBoard;
     public List<CardAttributes> cardsInHand;
     public List<CardAttributes> cardsDeck;
-    [SerializeField] private int lifePoint;
 
-    public bool inAttackPhase;
+    [Header("Life system")]
+    [SerializeField] private int lifePoint;
+    [SerializeField] private TextMeshPro lifeText;
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
         turnBasedSystem = GameObject.Find("TurnManager").GetComponent<TurnBasedSystem>();
+
+        if (lifeText != null) lifeText.text = lifePoint.ToString();
 
         ShuffleDeck(cardsDeck);
         GiveStarterCards();
@@ -89,6 +96,17 @@ public class PlayerBoard : MonoBehaviour
         if (PlayerUI != null)
         {
             PlayerUI.UpdateCarousel();
+        }
+    }
+
+    public void TakeDamage(int amount)
+    {
+        lifePoint -= amount;
+        if(lifeText != null) lifeText.text = lifePoint.ToString();
+
+        if(lifePoint <= 0)
+        {
+            turnBasedSystem.UpdateText("Defeat");
         }
     }
 }

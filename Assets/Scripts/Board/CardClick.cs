@@ -11,11 +11,14 @@ public class CardClick : MonoBehaviour
     private TurnBasedSystem turnBasedSystem;
     [SerializeField] private Image cardPreview;
 
+    private PlayerBoard enemyBoard;
+
     private Card tempCard;
 
     private void Start()
     {
         turnBasedSystem = GameObject.Find("TurnManager").GetComponent<TurnBasedSystem>();
+        enemyBoard = GameObject.FindGameObjectWithTag("IAManager").GetComponent<PlayerBoard>();
     }
 
     void Update()
@@ -55,7 +58,16 @@ public class CardClick : MonoBehaviour
                                     if (tempCard.canAttack)
                                     {
                                         originAttack = tempCard;
-                                        Debug.Log("Select target");
+
+                                        if(enemyBoard != null && enemyBoard.cardsOnBoard.Count <= 0)
+                                        {
+                                            enemyBoard.TakeDamage(originAttack.Stats._attack);
+
+                                            //Reset
+                                            originAttack.canAttack = false;
+                                            target = null;
+                                            originAttack = null;
+                                        }
                                     }
                                     else
                                     {

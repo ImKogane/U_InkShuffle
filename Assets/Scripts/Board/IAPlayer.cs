@@ -36,7 +36,7 @@ public class IAPlayer : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Attaque du joueur");
+                    playerBoard.TakeDamage(card.Stats._attack);
                 }
             }
         }  

@@ -26,7 +26,7 @@ public class TurnBasedSystem : MonoBehaviour
 
     [Header("User interface")]
     [SerializeField] private TextMeshProUGUI animText;
-    [SerializeField] private TextMeshProUGUI turnCount;
+    [SerializeField] private TextMeshPro turnCount;
     private Animator animatorText;
 
     private void Start()
