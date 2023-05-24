@@ -21,6 +21,10 @@ public class Card : MonoBehaviour
     public enum Rarity { Common, Rare, Epic};
     private CardType _type;
     private Rarity _rarity;
+
+    [SerializeField] public enum cardSide { PLAYERCARD, AICARD };
+    public cardSide actualCardSide;
+
     #endregion
 
     #region Getter&Setter

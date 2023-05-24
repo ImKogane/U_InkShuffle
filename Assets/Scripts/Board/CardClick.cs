@@ -57,15 +57,25 @@ public class CardClick : MonoBehaviour
                             {
                                 if (tempCard != originAttack)
                                 {
-                                    target = tempCard;
-                                    originAttack.ApplyDamage(target);
+                                    if(tempCard.actualCardSide == Card.cardSide.AICARD)
+                                    {
+                                        target = tempCard;
+                                        originAttack.ApplyDamage(target);
 
-                                    target = null;
-                                    originAttack = null;
+                                        target = null;
+                                        originAttack = null;
+                                    }
+                                    else
+                                    {
+                                        Debug.Log("Tu t'attaque toi-même !");
+                                        ResetAttack();
+                                    }
+                                    
                                 }
                                 else
                                 {
-                                    Debug.Log("Tu t'attaque toi-même !");
+                                    Debug.Log("Tu attaque la même carte !");
+                                    ResetAttack();
                                 }
 
                             }
@@ -79,6 +89,13 @@ public class CardClick : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void ResetAttack()
+    {
+        tempCard = null;
+        originAttack = null;
+        target = null;
     }
 }
 
