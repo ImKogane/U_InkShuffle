@@ -9,8 +9,6 @@ public class PlaceCard : MonoBehaviour
     public GameObject card;
     public List<Transform> positionsList;
 
-
-
     private void Start()
     {
         GameObject[] waypoints = GameObject.FindGameObjectsWithTag("PlayerCardPlaces");

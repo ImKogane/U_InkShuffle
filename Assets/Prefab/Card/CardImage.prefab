@@ -91,7 +91,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8a61b580587a140b2122d76000120a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardScriptableObjects: []
+  cardScriptableObjects:
+  - {fileID: 11400000, guid: 580f62adc7bd3294983d60c4f48e20ee, type: 2}
+  - {fileID: 11400000, guid: 77ec2b79a27c4fe45add1a9df800383e, type: 2}
+  - {fileID: 11400000, guid: b04f6e19cd36f574281ea9947d4234be, type: 2}
+  - {fileID: 11400000, guid: 7c5916da4d11d1c419492b3fecb4c199, type: 2}
+  - {fileID: 11400000, guid: bcb367bd357e5264ba39df7a933e9ba7, type: 2}
+  - {fileID: 11400000, guid: 194b8db901db5cc4baf26a3c1de3bb3c, type: 2}
+  - {fileID: 11400000, guid: 18c445a3e7e120f46ac4abf58f25ead3, type: 2}
+  - {fileID: 11400000, guid: 45b1484bcbb4d564c9d3e131709eec7c, type: 2}
+  - {fileID: 11400000, guid: b55c9210dcbd9d840a0d35d70389c69f, type: 2}
+  - {fileID: 11400000, guid: 9471f557d29d3c543911634bb161989b, type: 2}
+  - {fileID: 11400000, guid: 407541f72cadfd443b058373aaeebc4d, type: 2}
+  - {fileID: 11400000, guid: f097cdaa49468334887d4b6abf43eccb, type: 2}
   associatedScriptableObject: {fileID: 0}
 --- !u!114 &971413480
 MonoBehaviour:
