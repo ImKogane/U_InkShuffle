@@ -21,11 +21,7 @@ namespace Mods
 			TOCScript = new ModTOCScript(this);
 
 			if (!TOCScript.TryDoFile(modName)) // Read TOC file
-			{
 				TOCScript = null;
-			}
-			
-			TOCScript?.Initialize();
 		}
 
 		/// <summary>

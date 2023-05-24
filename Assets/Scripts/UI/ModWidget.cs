@@ -32,7 +32,7 @@ public class ModWidget : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if (HasValidMod())
         {
-            ModTitleText?.SetText(_mod.TOCScript.Toc.title);
+            ModTitleText?.SetText(_mod.TOCScript.Toc.GetDisplayTitle());
             ModEnabledToggle?.SetIsOnWithoutNotify(_mod.IsEnabled);
         }
     }

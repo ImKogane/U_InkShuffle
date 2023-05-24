@@ -16,14 +16,14 @@ namespace Mods
 			public ModTOCScript(Mod mod)
 				: base(mod, CoreModules.None)
 			{
+				Toc = new TOC(_mod.ModName);
+				SetupGlobals();
 			}
 
-			// Initialize mod TOC
-			public void Initialize()
+			// Setup global environment
+			private void SetupGlobals()
 			{
-				Toc = new TOC();
-				if (!TryLuaRunner(() => Call(Globals[_mod.ModName], Toc)))
-					_mod.TOCScript = null;
+				Globals["toc"] = Toc;
 			}
 
 			[MoonSharpUserData]
@@ -34,20 +34,40 @@ namespace Mods
 				public string version;
 				public string author;
 				public List<string> filesToLoad = new();
+
+				private string _defaultModTitle;
+
+				public TOC(string defaultModTitle)
+				{
+					_defaultModTitle = defaultModTitle;
+				}
+				
+				[MoonSharpHidden]
+				public string GetDisplayTitle()
+				{
+					return string.IsNullOrWhiteSpace(title) ? _defaultModTitle : title;
+				}
 				
 				public override string ToString()
 				{
-					return "[Title: \"" + title + "\", Version \"" + version + "\", Author: \"" + author + "\"]";
+					return "[Title: \"" + GetDisplayTitle() + "\", Version \"" + version + "\", Author: \"" + author + "\"]";
 				}
 				
 				public string ToTooltipString()
 				{
 					string tooltip = "";
+
+					tooltip += "Title: " + GetDisplayTitle().Truncate(56) + "\n";
 					
-					tooltip += "Title: " + title.Truncate(56) + "\n";
-					tooltip += "Notes: " + notes + "\n";
-					tooltip += "Version: " + version + "\n";
-					tooltip += "Author: " + author + "\n";
+					if (!string.IsNullOrWhiteSpace(notes))
+						tooltip += "Notes: " + notes + "\n";
+					
+					if (!string.IsNullOrWhiteSpace(version))
+						tooltip += "Version: " + version + "\n";
+					
+					if (!string.IsNullOrWhiteSpace(author))
+						tooltip += "Author: " + author + "\n";
+					
 					tooltip += "Files to load: " + filesToLoad.Count + "\n";
 
 					return tooltip;

@@ -3,12 +3,11 @@
 EXAMPLE TABLE OF CONTENTS FILE
 This file is only used to initialize the Mod's information.
 
-To create a new Mod, follow these 5 steps:
+To create a new Mod, follow these 4 steps:
     - Find a name for your mod (ex: MyMod)
     - Create a new folder in StreamingAssets/Mods with your mod's name (ex: StreamingAssets/Mods/MyMod)
     - In that folder, create a lua script with your mod's name (ex: StreamingAssets/Mods/MyMod/MyMod.lua)
-    - In this lua script, define a global function with your mod's name (ex: function MyMod(toc) ... end)
-    - Fill in the necessary fields to give information about your mod (see toc definition just below)
+    - Fill in the necessary fields in the "toc" global variable to give information about your mod (see toc definition just below)
 
 toc is a table (more precisely a userdata) containing specific fields that you can overwrite:
 toc = {
@@ -24,13 +23,15 @@ toc = {
 
 ]]
 
-function BaseGame(toc)
-    toc.title = "Base Game"
-    toc.notes = "The base game data and features"
-    toc.version = "0.1"
-    toc.author = "Groupe3"
-    toc.filesToLoad = {
-        "exampleAPI",
-        "exampleAPI2",
-    }
-end
+toc.title = "Base Game"
+
+toc.notes = "The base game data and features"
+
+toc.version = "0.1"
+
+toc.author = "Groupe3"
+
+toc.filesToLoad = {
+    "exampleAPI",
+    "exampleAPI2",
+}
