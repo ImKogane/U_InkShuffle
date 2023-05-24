@@ -122,7 +122,7 @@ public class Card : MonoBehaviour
 
             if(c._pv <= 0)
             {
-                ClearBoard(c, tag);
+                c.ClearBoard(c, tag);
             }
             else
             {
@@ -185,7 +185,7 @@ public class Card : MonoBehaviour
                 {
                     Debug.Log("Identiques");
                     tempListBoard.RemoveAt(i);
-                    Destroy(tempListBoard[i].gameObject);
+                    Destroy(card.gameObject);
                 }
                 else
                 {
