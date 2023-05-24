@@ -14,7 +14,9 @@ public class TurnBasedSystem : MonoBehaviour
     [SerializeField] private int turnNumber = 0;
 
     [SerializeField] private IAPlayer gameAI;
+
     [SerializeField] public bool playerCanAttack;
+    [SerializeField] public bool playerCanPutCard;
 
 
     [Header("Player boards")]
@@ -99,8 +101,8 @@ public class TurnBasedSystem : MonoBehaviour
         {
             case playerTurn.PLAYER1:
 
-                //Débloque les actions du joueur pour deposer une carte
-                
+                playerCanPutCard = true;
+
                 break;
             case playerTurn.PLAYER2:
 
@@ -123,6 +125,8 @@ public class TurnBasedSystem : MonoBehaviour
             case playerTurn.PLAYER1:
 
                 playerCanAttack = true;
+                playerCanPutCard = false;
+
                 break;
             case playerTurn.PLAYER2:
 

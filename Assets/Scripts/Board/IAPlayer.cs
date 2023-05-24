@@ -28,8 +28,17 @@ public class IAPlayer : MonoBehaviour
         {
             if(card.canAttack) 
             {
-                Card randomTarget = playerBoard.cardsOnBoard[Random.Range(0, playerBoard.cardsOnBoard.Count)];
-                card.ApplyDamage(randomTarget);
+                if(playerBoard.cardsOnBoard.Count > 0)
+                {
+                    Card randomTarget = playerBoard.cardsOnBoard[Random.Range(0, playerBoard.cardsOnBoard.Count)];
+                    card.ApplyDamage(randomTarget);
+                    Debug.Log("Attaque de l'IA");
+                }
+                else
+                {
+                    Debug.Log("Attaque du joueur");
+                }
+                
             }
         }
         
@@ -57,7 +66,11 @@ public class IAPlayer : MonoBehaviour
                     points[randomPosIndex].GetComponent<WaypointManager>().IsBusy = true;
                     ownBoard.cardsInHand.RemoveAt(randCardIndex);
 
-                    if (placedCard.GetComponent<Card>() != null) placedCard.GetComponent<Card>().Side = Card.cardSide.AICard;
+                    if (placedCard.GetComponent<Card>() != null)
+                    {
+                        placedCard.GetComponent<Card>().Side = Card.cardSide.AICard;
+                        ownBoard.cardsOnBoard.Add(placedCard.GetComponent<Card>());
+                    }
 
                 }
                 else

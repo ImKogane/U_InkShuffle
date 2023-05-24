@@ -17,7 +17,6 @@ public class Card : MonoBehaviour
     private Sprite _fullImage;
     private int _pv;
     private int _attack;
-    [SerializeField]
     private bool _isPlaced;
     public enum CardType { Normal, Special };
     public enum Rarity { Common, Rare, Epic};

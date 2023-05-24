@@ -9,7 +9,7 @@ public class PlaceCard : MonoBehaviour
     public GameObject card;
     public List<Transform> positionsList;
 
-
+    private TurnBasedSystem turnBasedSystem;
 
     private void Start()
     {
@@ -18,40 +18,47 @@ public class PlaceCard : MonoBehaviour
         {
             positionsList.Add(w.gameObject.transform);
         }
+
+        turnBasedSystem = GameObject.Find("TurnManager").GetComponent<TurnBasedSystem>();
     }
 
     public void SpawnCardAtRandomPosition()
     {
-        bool allTrue = CheckAllBooleansTrue();
-        if (!allTrue)
+        if(turnBasedSystem.playerCanPutCard)
         {
-            if (positionsList.Count != 0)
+            bool allTrue = CheckAllBooleansTrue();
+            if (!allTrue)
             {
-                card.GetComponent<Card>().Stats = GetComponent<SpriteLookup>().associatedScriptableObject;
+                if (positionsList.Count != 0)
+                {
+                    card.GetComponent<Card>().Stats = GetComponent<SpriteLookup>().associatedScriptableObject;
 
-                int randomIndex = Random.Range(0, positionsList.Count);
-                if (positionsList[randomIndex].GetComponent<WaypointManager>().IsBusy != true)
-                {
-                    Vector3 randomPosition = positionsList[randomIndex].position;
-                    GameObject placedCard = Instantiate(card, randomPosition, Quaternion.identity);
-                    positionsList[randomIndex].GetComponent<WaypointManager>().IsBusy = true;
-                    if (placedCard.GetComponent<Card>() != null)
+                    int randomIndex = Random.Range(0, positionsList.Count);
+                    if (positionsList[randomIndex].GetComponent<WaypointManager>().IsBusy != true)
                     {
-                        placedCard.GetComponent<Card>().Placed = true;
-                        placedCard.GetComponent<Card>().Side = Card.cardSide.PlayerCard;
+                        Vector3 randomPosition = positionsList[randomIndex].position;
+                        GameObject placedCard = Instantiate(card, randomPosition, Quaternion.identity);
+                        positionsList[randomIndex].GetComponent<WaypointManager>().IsBusy = true;
+                        if (placedCard.GetComponent<Card>() != null)
+                        {
+                            placedCard.GetComponent<Card>().Placed = true;
+                            placedCard.GetComponent<Card>().Side = Card.cardSide.PlayerCard;
+                        }
+                        turnBasedSystem.playerCanPutCard = false;
+                        ClearDeckHand(placedCard);
                     }
-                    ClearDeckHand(placedCard);
-                }
-                else
-                {
-                    SpawnCardAtRandomPosition();
+                    else
+                    {
+                        SpawnCardAtRandomPosition();
+                    }
                 }
             }
+            else
+            {
+                return;
+            }
         }
-        else
-        {
-            return;
-        }
+        else { return; }
     }
 
     private bool CheckAllBooleansTrue()
