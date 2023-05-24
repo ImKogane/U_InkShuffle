@@ -1,31 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using TMPro;
 using UnityEngine;
 
 public class TurnBasedSystem : MonoBehaviour
 {
 
-    [SerializeField] private enum turnPhase { START, DRAW, FREE, ATTACK, END};
-    [SerializeField] private enum playerTurn { PLAYER1, PLAYER2 };
-
+    private enum turnPhase { START, DRAW, FREE, ATTACK, END};
+    private enum playerTurn { PLAYER1, PLAYER2 };
     private playerTurn actualPlayerTurn;
     private turnPhase actualPhase;
-    [SerializeField] private int turnNumber = 0;
+
+    private int turnNumber = 0;
 
     [SerializeField] private IAPlayer gameAI;
-
-    [SerializeField] public bool playerCanAttack;
-    [SerializeField] public bool playerCanPutCard;
-
 
     [Header("Player boards")]
     [SerializeField] private PlayerBoard Player1Board;
     [SerializeField] private PlayerBoard Player2Board;
 
+    [Header("Player permissions")]
+    [SerializeField] public bool playerCanAttack;
+    [SerializeField] public bool playerCanPutCard;
+
+    [Header("User interface")]
+    [SerializeField] private TextMeshProUGUI animText;
+    [SerializeField] private TextMeshProUGUI turnCount;
+    private Animator animatorText;
+
     private void Start()
     {
-        StartNewTurn();
+        if(animText != null)
+        {
+            animatorText = animText.gameObject.GetComponent<Animator>();
+        }
+
+        StartCoroutine(StartNewTurn());
     }
 
     void Update()
@@ -45,10 +56,10 @@ public class TurnBasedSystem : MonoBehaviour
         switch (actualPhase)
         {
             case turnPhase.DRAW:
-                FreePhase();
+                StartCoroutine(FreePhase());
                 break;
             case turnPhase.FREE:
-                AttackPhase();
+                StartCoroutine(AttackPhase());
                 break;
             case turnPhase.ATTACK:
                 EndAttackPhase();
@@ -56,15 +67,20 @@ public class TurnBasedSystem : MonoBehaviour
         }
     }
 
-    public void StartNewTurn()
+    public IEnumerator StartNewTurn()
     {
         turnNumber++;
+        if(turnCount != null) turnCount.text = turnNumber.ToString();
         actualPhase = turnPhase.START;
         actualPlayerTurn = playerTurn.PLAYER1;
 
         ResetCardAttack();
 
-        Debug.Log("New turn ("+turnNumber+")");
+        StartCoroutine(UpdateText("YOUR TURN"));
+        yield return new WaitForSeconds(2.1f);
+
+
+        
 
         DrawPhase();
     }
@@ -72,7 +88,6 @@ public class TurnBasedSystem : MonoBehaviour
     public void DrawPhase()
     {
         actualPhase = turnPhase.DRAW;
-        Debug.Log(actualPhase + " phase - " + actualPlayerTurn);
 
         switch (actualPlayerTurn)
         {
@@ -92,10 +107,20 @@ public class TurnBasedSystem : MonoBehaviour
         
     }
 
-    public void FreePhase()
+    public IEnumerator FreePhase()
     {
         actualPhase = turnPhase.FREE;
-        Debug.Log(actualPhase + " phase - " + actualPlayerTurn);
+        if (actualPlayerTurn == playerTurn.PLAYER1)
+        {
+            StartCoroutine(UpdateText("FREE PHASE"));
+            yield return new WaitForSeconds(2.1f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        
 
         switch (actualPlayerTurn)
         {
@@ -107,7 +132,7 @@ public class TurnBasedSystem : MonoBehaviour
             case playerTurn.PLAYER2:
 
                 gameAI.PutCard();
-                AttackPhase();
+                StartCoroutine(AttackPhase());
 
                 break;
         }
@@ -115,10 +140,19 @@ public class TurnBasedSystem : MonoBehaviour
         
     }
     
-    public void AttackPhase()
+    public IEnumerator AttackPhase()
     {
         actualPhase = turnPhase.ATTACK;
-        Debug.Log(actualPhase + " phase - " + actualPlayerTurn);
+
+        if (actualPlayerTurn == playerTurn.PLAYER1)
+        {
+            StartCoroutine(UpdateText("ATTACK PHASE"));
+            yield return new WaitForSeconds(2.1f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
 
         switch (actualPlayerTurn)
         {
@@ -144,7 +178,7 @@ public class TurnBasedSystem : MonoBehaviour
         {
             case playerTurn.PLAYER1:
                 playerCanAttack = false;
-                NewPlayerPhase();
+                StartCoroutine(NewPlayerPhase());
                 break;
             case playerTurn.PLAYER2:
                 EndTurn();
@@ -155,20 +189,27 @@ public class TurnBasedSystem : MonoBehaviour
     public void EndTurn()
     { 
         actualPhase = turnPhase.END;
-        StartNewTurn();
+        StartCoroutine(StartNewTurn());
     }
 
 
-    private void NewPlayerPhase()
+    private IEnumerator NewPlayerPhase()
     {
         switch (actualPlayerTurn)
         {
             case playerTurn.PLAYER1:
+
                 actualPlayerTurn = playerTurn.PLAYER2;
+
+                StartCoroutine(UpdateText("AI TURN"));
+
+                yield return new WaitForSeconds(2.1f);
+
                 DrawPhase();
+
                 break;
             case playerTurn.PLAYER2:
-                StartNewTurn();
+                StartCoroutine(StartNewTurn());
                 break;
         }
     }
@@ -185,6 +226,19 @@ public class TurnBasedSystem : MonoBehaviour
             card.canAttack = true;
         }
 
+    }
+
+    public IEnumerator UpdateText(string text)
+    {
+        animText.gameObject.SetActive(true);
+        animText.text = text;
+        animatorText.Play(0);
+
+        yield return new WaitForSeconds(2.1f);
+
+        animText.gameObject.SetActive(false);
+
+        yield return null;
     }
 
 }
