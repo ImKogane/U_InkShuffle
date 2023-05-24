@@ -69,7 +69,7 @@ public class PlaceCard : MonoBehaviour
         GameObject tempGameObject = GameObject.FindGameObjectWithTag("PlayerManager");
         PlayerBoard tempDeck = tempGameObject.GetComponent<PlayerBoard>();
         List<CardAttributes> tempList = tempDeck.cardsInHand;
-        for (int i = 0; i < tempList.Count; ++i)
+        for (int i = 0; i < tempList.Count - 1; ++i)
         {
             if (tempList[i] == GetComponent<SpriteLookup>().associatedScriptableObject)
             {
