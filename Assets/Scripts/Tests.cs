@@ -30,6 +30,16 @@ public class Tests : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             ModsManager.Instance.DiscoverMods();
+        }	
+        
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            print(ModsManager.Instance.GetMod("BaseGame")?.LogicScript.Globals.Get("HelloTest"));
+            // foreach (var mod in ModsManager.Instance.EnumerateEnabledMods())
+            // {
+            //     mod.LogicScript.
+            //     mod.TryRunner(() => mod.LogicScript.Call(mod.LogicScript.Globals.Get("OnEndRound")));
+            // }
         }
     }
     

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
@@ -12,49 +11,30 @@ namespace Mods
 	
 	public class ModsManager : LazySingleton<ModsManager>
 	{
-		private readonly string _basePath = Application.streamingAssetsPath + "/Mods/";
-		private readonly string _extension = ".lua";
-		
 		private readonly SortedDictionary<string, Mod> _mods = new();
 		
 		public event Runner OnStartDiscovery;
 		public event Runner OnEndDiscovery;
 
-		public IEnumerable<KeyValuePair<string, Mod>> EnumerateAllMods()
+		public IEnumerable<Mod> EnumerateAllMods()
 		{
-			return _mods.AsEnumerable();
+			return _mods.Values.AsEnumerable();
 		}
 		
-		public IEnumerable<KeyValuePair<string, Mod>> EnumerateEnabledMods()
+		public IEnumerable<Mod> EnumerateEnabledMods()
 		{
-			return _mods.Where(e => e.Value.IsEnabled).AsEnumerable();
+			return _mods.Values.Where(mod => mod.IsEnabled).AsEnumerable();
 		}
 		
-		public IEnumerable<KeyValuePair<string, Mod>> EnumerateDisabledMods()
+		public IEnumerable<Mod> EnumerateDisabledMods()
 		{
-			return _mods.Where(e => !e.Value.IsEnabled).AsEnumerable();
+			return _mods.Values.Where(mod => !mod.IsEnabled).AsEnumerable();
 		}
 
 		[CanBeNull]
 		public Mod GetMod(string modName)
 		{
 			return _mods.ContainsKey(modName) ? _mods[modName] : null;
-		}
-		
-		public bool TryDoFile(Script script, string modName, string fileName)
-		{
-			string fullPath = _basePath + modName + "/" + fileName + _extension;
-			
-			try
-			{
-				script.DoString(File.ReadAllText(fullPath));
-				return true;
-			}
-			catch (Exception e)
-			{
-				Debug.LogWarning("Error while loading lua script at \"" + fullPath + "\", reason: " + e.Message);
-				return false;
-			}
 		}
 
 		protected override void SingletonAwake()
@@ -88,14 +68,14 @@ namespace Mods
 																	entry => entry.Value.IsEnabled);
 			
 			// --> disable all current mods
-			foreach (var element in EnumerateAllMods())
+			foreach (var mod in EnumerateAllMods())
 			{
-				element.Value.SetModEnabled(false);
+				mod.SetModEnabled(false);
 			}
 			_mods.Clear();
 			
 			// --> iterate through the Mods directory
-			DirectoryInfo dir = new DirectoryInfo(_basePath);
+			DirectoryInfo dir = new DirectoryInfo(ModScript.basePath);
 			if (dir.Exists)
 			{
 				foreach (DirectoryInfo addonDir in dir.EnumerateDirectories())
@@ -134,9 +114,9 @@ namespace Mods
 			else
 			{
 				print("======= DISCOVERED MODS: =======");
-				foreach (var element in EnumerateAllMods())
+				foreach (var mod in EnumerateAllMods())
 				{
-					print(element.Value.ToString());
+					print(mod.ToString());
 				}
 				print("==============================");
 			}

@@ -80,12 +80,12 @@ namespace DefaultNamespace
 			});
 			
 			// create new ones for all discovered mods
-			foreach (var element in ModsManager.Instance.EnumerateAllMods())
+			foreach (var mod in ModsManager.Instance.EnumerateAllMods())
 			{
 				GameObject modWidgetGo = Instantiate(ModWidgetPrefab, ModsListParent?.transform);
 				ModWidget modWidget = modWidgetGo?.GetComponent<ModWidget>();
 				
-				modWidget?.Initialize(this, element.Value);
+				modWidget?.Initialize(this, mod);
 			}
 			
 			// misc changes

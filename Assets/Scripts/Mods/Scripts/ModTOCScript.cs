@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MoonSharp.Interpreter;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,31 +9,21 @@ namespace Mods
 	public partial class Mod // Make ModTOCScript access private members in Mod (friend)
 	{
 
-		public class ModTOCScript : Script
+		public class ModTOCScript : ModScript
 		{
 			public TOC Toc { get; private set; }
-			
-			private Mod _mod;
 
 			public ModTOCScript(Mod mod)
-				: base(CoreModules.None)
+				: base(mod, CoreModules.None)
 			{
-				_mod = mod;
 			}
 
 			// Initialize mod TOC
 			public void Initialize()
 			{
-				try
-				{
-					Toc = new TOC();
-					Call(Globals[_mod.ModName], Toc);
-				}
-				catch (Exception e)
-				{
-					Debug.LogWarning("Error while loading TOC file for Mod \"" + _mod.ModName + "\", reason: " + e.Message);
+				Toc = new TOC();
+				if (!TryLuaRunner(() => Call(Globals[_mod.ModName], Toc)))
 					_mod.TOCScript = null;
-				}
 			}
 
 			[MoonSharpUserData]

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using MoonSharp.Interpreter;
+using UnityEngine;
 
 namespace Mods
 {
@@ -18,7 +20,7 @@ namespace Mods
 			
 			TOCScript = new ModTOCScript(this);
 
-			if (!ModsManager.Instance.TryDoFile(TOCScript, modName, modName)) // Read TOC file
+			if (!TOCScript.TryDoFile(modName)) // Read TOC file
 			{
 				TOCScript = null;
 			}
@@ -32,12 +34,12 @@ namespace Mods
 			SetModEnabled(true);
 		}
 
-		/**
-		 * Enable/Disable the mod.
-		 * NOTE: Enabling a disabled mod will reload the Logic files from the disk!
-		 * The TOC file and its infos will be untouched.
-		 * (to also reload TOC files, @see ModsManager.DiscoverMods)
-		 */
+		/// <summary>
+		/// Enable/Disable the mod.<br/><br/>
+		/// NOTE #1: Enabling a disabled mod will reload the Logic files from the disk!<br/><br/>
+		/// NOTE #2: The TOC file and its infos will be untouched.
+		/// (to also reload TOC files, see ModsManager.DiscoverMods)
+		/// </summary>
 		public void SetModEnabled(bool enabled)
 		{
 			if (!IsDiscovered)
@@ -55,20 +57,20 @@ namespace Mods
 				// load all mod files
 				foreach (var fileName in TOCScript.Toc.filesToLoad)
 				{
-					if (!ModsManager.Instance.TryDoFile(LogicScript, ModName, fileName)) // Read Logic Files
+					if (!LogicScript.TryDoFile(fileName)) // Read Logic Files
 					{
 						LogicScript = null;
 						break;
 					}
 				}
 
-				LogicScript?.OnEnable();
+				TryCall("OnModEnabled");
 			}
 			else if (!enabled && IsEnabled)
 			{
 				Debug.Log("------- Disable: " + ModName + " -------");
 				
-				LogicScript?.OnDisable();
+				TryCall("OnModDisabled");
 				LogicScript = null;
 			}
 		}
@@ -76,6 +78,49 @@ namespace Mods
 		public override string ToString()
 		{
 			return "[ModName: " + ModName + ", Enabled: \"" + IsEnabled + "\", ModInfo: " + TOCScript.Toc.ToString() + "]";
+		}
+		
+		/// <summary>
+		/// Try to call a lua global function in the mod.
+		/// </summary>
+		/// <param name="function">The Lua global function name.</param>
+		/// <param name="args">Additional arguments to send to the Lua function.</param>
+		/// <returns>
+		/// <b>True</b> if the call succeeded.<br/>
+		/// <b>False</b> if the function doesn't exist / an error was thrown.
+		/// </returns>
+		public bool TryCall(string function, params object[] args)
+		{
+			return LogicScript?.TryLuaRunner(() => LogicScript.Call(LogicScript.Globals[function], args)) ?? false;
+		}
+		
+		/// <summary>
+		/// Try to call a lua global function in the mod, <b>with the return value</b>.
+		/// </summary>
+		/// <param name="function">The Lua global function name.</param>
+		/// <param name="args">Additional arguments to send to the Lua function.</param>
+		/// <returns>
+		/// <b>DynValue</b> the return value of the lua function.<br/>
+		/// <b>null</b> if the function doesn't exist / an error was thrown.
+		/// </returns>
+		[CanBeNull]
+		public DynValue TryCallR(string function, params object[] args)
+		{
+			return LogicScript?.TryLuaSupplier(() => LogicScript.Call(LogicScript.Globals[function], args));
+		}
+		
+		/// <summary>
+		/// Try to get a lua global variable in the mod.
+		/// </summary>
+		/// <param name="variable">The Lua global variable name.</param>
+		/// <returns>
+		/// <b>DynValue</b> the value of the lua variable.<br/>
+		/// <b>null</b> if the variable doesn't exist / an error was thrown.
+		/// </returns>
+		[CanBeNull]
+		public DynValue TryGet(string variable)
+		{
+			return LogicScript?.TryLuaSupplier(() => LogicScript.Globals.Get(variable));
 		}
 	}
 }
