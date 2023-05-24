@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -66,11 +67,11 @@ public class PlaceCard : MonoBehaviour
         GameObject tempGameObject = GameObject.FindGameObjectWithTag("PlayerManager");
         PlayerBoard tempDeck = tempGameObject.GetComponent<PlayerBoard>();
         List<CardAttributes> tempList = tempDeck.cardsInHand;
-        foreach (CardAttributes c in tempList)
+        for (int i = 0; i < tempList.Count; ++i)
         {
-            if (c == GetComponent<SpriteLookup>().associatedScriptableObject)
+            if (tempList[i] == GetComponent<SpriteLookup>().associatedScriptableObject)
             {
-                tempList.RemoveAt(tempList.IndexOf(c));
+                tempList.RemoveAt(i);
                 AutoCreateCarousel tempUI = FindObjectOfType<AutoCreateCarousel>();
                 tempUI.UpdateCarousel();
             }
