@@ -71,6 +71,14 @@
         type = "NORMAL",
         rarity = "COMMON",
     },
+    {
+        name = "Mr.Ink",
+        imagePath = "Art/mrink",
+        hp = 3,
+        attack = 2,
+        type = "NORMAL",
+        rarity = "RARE",
+    },
 }
 
 function RegisterCards()
