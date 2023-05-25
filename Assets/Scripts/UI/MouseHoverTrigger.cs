@@ -15,8 +15,7 @@ public class MouseHoverTrigger : MonoBehaviour, IPointerClickHandler, IPointerEn
     public void OnPointerEnter(PointerEventData eventData)
     {
         previewImage.gameObject.SetActive(true);
-        GetComponent<SpriteLookup>().Search();
-        previewImage.sprite = GetComponent<SpriteLookup>().associatedScriptableObject._fullImage;
+        previewImage.sprite = GetComponent<ScriptableObjectManager>().card._fullImage;
     }
 
     public void OnPointerExit(PointerEventData eventData)
