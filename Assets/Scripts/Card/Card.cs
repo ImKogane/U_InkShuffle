@@ -183,7 +183,6 @@ public class Card : MonoBehaviour
 
         if (card.Placed == true)
         {
-            Debug.Log("DESTROY TA MERE");
             for (int i = 0; i < tempListBoard.Count; ++i)
             {
                 if (tempListBoard[i] == card)
