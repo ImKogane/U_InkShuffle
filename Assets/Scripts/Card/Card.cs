@@ -25,10 +25,12 @@ public class Card : MonoBehaviour
     private Rarity _rarity;
     private cardSide _actualCardSide;
 
-    [SerializeField] private TextMeshProUGUI lifeText;
-    [SerializeField] private TextMeshProUGUI atkText;
+    
 
     public bool canAttack;
+
+    [SerializeField] private TextMeshProUGUI lifeText;
+    [SerializeField] private TextMeshProUGUI atkText;
 
     #endregion
 
