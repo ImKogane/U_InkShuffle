@@ -7,7 +7,7 @@ public class PlayerBoard : MonoBehaviour
 {
     private TurnBasedSystem turnBasedSystem;
 
-    [SerializeField] private Animator deck;
+    
     [SerializeField] private AutoCreateCarousel PlayerUI;
 
     public bool inAttackPhase;
@@ -20,7 +20,11 @@ public class PlayerBoard : MonoBehaviour
     [SerializeField] private int lifePoint;
     [SerializeField] private TextMeshPro lifeText;
 
-    
+    [Header("Deck")]
+    [SerializeField] private Animator deckAnimator;
+    [SerializeField] private GameObject deck;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,9 +51,9 @@ public class PlayerBoard : MonoBehaviour
         if(cardsDeck.Count > 0)
         {
             
-            if (deck != null)
+            if (deckAnimator != null)
             {
-                deck.SetTrigger("Draw");
+                deckAnimator.SetTrigger("Draw");
                 yield return new WaitForSeconds(0.7f);
             }
             else
@@ -66,10 +70,15 @@ public class PlayerBoard : MonoBehaviour
                 PlayerUI.UpdateCarousel();
             }
 
-            
+            if (cardsDeck.Count <= 0 && deck != null)
+            {
+                deck.SetActive(false);
+            }
+
+
         }
 
-        turnBasedSystem.SkipPhase();
+        StartCoroutine(turnBasedSystem.FreePhase());
     }
 
     void ShuffleDeck<T>(List<T> list)

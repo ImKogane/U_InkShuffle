@@ -65,8 +65,10 @@ public class CardClick : MonoBehaviour
                                     if (tempCard.canAttack)
                                     {
                                         originAttack = tempCard;
+                                        turnBasedSystem.UpdateMidText("SELECT TARGET");
 
-                                        if(enemyBoard != null && enemyBoard.cardsOnBoard.Count <= 0)
+
+                                        if (enemyBoard != null && enemyBoard.cardsOnBoard.Count <= 0)
                                         {
                                             tempCard.PlayAnimAttack();
                                             enemyBoard.TakeDamage(originAttack.Stats._attack);
@@ -75,6 +77,11 @@ public class CardClick : MonoBehaviour
                                             originAttack.canAttack = false;
                                             target = null;
                                             originAttack = null;
+                                            turnBasedSystem.ResetMidText();
+                                        }
+                                        else
+                                        {
+                                            
                                         }
                                     }
                                     else
@@ -97,7 +104,9 @@ public class CardClick : MonoBehaviour
 
                                             target = null;
                                             originAttack = null;
-                                        
+                                            turnBasedSystem.ResetMidText();
+
+
                                     }
                                     
                                 }
@@ -115,6 +124,7 @@ public class CardClick : MonoBehaviour
                 {
                     tempCard = null;
                     cardPreview.gameObject.SetActive(false);
+
                 }
             }
         }
@@ -125,6 +135,7 @@ public class CardClick : MonoBehaviour
         tempCard = null;
         originAttack = null;
         target = null;
+        turnBasedSystem.ResetMidText();
     }
 }
 

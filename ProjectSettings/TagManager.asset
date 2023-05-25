@@ -11,6 +11,7 @@ TagManager:
   - IACardPlaces
   - Card
   - IAManager
+  - SkipButton
   layers:
   - Default
   - TransparentFX

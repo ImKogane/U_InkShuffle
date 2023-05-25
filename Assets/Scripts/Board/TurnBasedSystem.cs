@@ -31,6 +31,8 @@ public class TurnBasedSystem : MonoBehaviour
     [SerializeField] private UI_EndScreen EndCanvas;
     private Animator animatorText;
 
+    public bool canSkip;
+
     private void Start()
     {
         if(animText != null)
@@ -43,36 +45,35 @@ public class TurnBasedSystem : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+
+        if(actualPlayerTurn == playerTurn.PLAYER2)
         {
-            if (actualPlayerTurn == playerTurn.PLAYER1)
-            {
-                SkipPhase();
-            }
+            canSkip = false;
         }
     }
 
 
     public void SkipPhase()
     {
-        switch (actualPhase)
+        if (actualPlayerTurn == playerTurn.PLAYER1)
         {
-            case turnPhase.DRAW:
-                StartCoroutine(FreePhase());
-                break;
-            case turnPhase.FREE:
-                StartCoroutine(AttackPhase());
-                break;
-            case turnPhase.ATTACK:
-                EndAttackPhase();
-                break;
+            switch (actualPhase)
+            {
+                case turnPhase.FREE:
+                    StartCoroutine(AttackPhase());
+                    break;
+                case turnPhase.ATTACK:
+                    EndAttackPhase();
+                    break;
+            }
         }
+  
     }
 
     public IEnumerator StartNewTurn()
     {
         turnNumber++;
-        if(turnCount != null) turnCount.text = turnNumber.ToString();
+        ResetMidText();
         actualPhase = turnPhase.START;
         actualPlayerTurn = playerTurn.PLAYER1;
 
@@ -94,6 +95,7 @@ public class TurnBasedSystem : MonoBehaviour
         switch (actualPlayerTurn)
         {
             case playerTurn.PLAYER1:
+                canSkip = false;
 
                 UpdatePhaseText("DRAW");
                 StartCoroutine(Player1Board.DrawDeckCard());
@@ -122,15 +124,22 @@ public class TurnBasedSystem : MonoBehaviour
                 UpdatePhaseText("FREE");
                 yield return new WaitForSeconds(2.1f);
 
+                canSkip = true;
                 playerCanPutCard = true;
 
                 break;
             case playerTurn.PLAYER2:
 
+
+                yield return new WaitForSeconds(0.5f);
+              
+                gameAI.PutCard();
+
                 yield return new WaitForSeconds(0.5f);
 
-                gameAI.PutCard();
                 StartCoroutine(AttackPhase());
+
+                
 
                 break;
         }
@@ -146,20 +155,23 @@ public class TurnBasedSystem : MonoBehaviour
         switch (actualPlayerTurn)
         {
             case playerTurn.PLAYER1:
+                canSkip = true;
 
-                if(Player1Board.cardsOnBoard.Count > 0)
+                if (Player1Board.cardsOnBoard.Count > 0)
                 {
                     StartCoroutine(UpdateText("ATTACK PHASE"));
                     UpdatePhaseText("ATTACK");
                     yield return new WaitForSeconds(2.1f);
 
+                    
                     playerCanAttack = true;
                     playerCanPutCard = false;
                 }
                 else
                 {
                     yield return new WaitForSeconds(0.1f);
-                    SkipPhase();
+
+                    EndAttackPhase();
                 }
 
                 break;
@@ -175,7 +187,7 @@ public class TurnBasedSystem : MonoBehaviour
                 else
                 {
                     yield return new WaitForSeconds(0.1f);
-                    SkipPhase();
+                    EndAttackPhase();
                 }
 
                 break;
@@ -186,10 +198,13 @@ public class TurnBasedSystem : MonoBehaviour
 
     public void EndAttackPhase()
     {
+        canSkip = false;
+
         switch (actualPlayerTurn)
         {
             case playerTurn.PLAYER1:
                 playerCanAttack = false;
+                
                 StartCoroutine(NewPlayerPhase());
                 break;
             case playerTurn.PLAYER2:
@@ -207,6 +222,8 @@ public class TurnBasedSystem : MonoBehaviour
 
     private IEnumerator NewPlayerPhase()
     {
+        
+        canSkip = false;
         UpdatePhaseText("");
 
         switch (actualPlayerTurn)
@@ -260,6 +277,20 @@ public class TurnBasedSystem : MonoBehaviour
             phaseText.text = text;
 
     }
+    public void UpdateMidText(string text)
+    {
+        if (turnCount != null)
+            turnCount.text = text;
+
+    }
+
+    public void ResetMidText()
+    {
+        if (turnCount != null)
+            turnCount.text = turnNumber.ToString();
+
+    }
+
 
     public void WinGame()
     {

@@ -29,6 +29,8 @@ public class Card : MonoBehaviour
 
     public bool canAttack;
 
+    private TurnBasedSystem _turnBasedSystem;
+
     #endregion
 
     #region Getter&Setter
@@ -92,6 +94,7 @@ public class Card : MonoBehaviour
         Init(Stats);
         MeshAttributes();
         AdaptUI();
+
 
     }
 
@@ -211,7 +214,7 @@ public class Card : MonoBehaviour
         {
             Animator animator = GetComponent<Animator>();
 
-            if (animator != null)
+            if (animator != null && gameObject != null)
             {
                 animator.SetTrigger("Attack");
             }
