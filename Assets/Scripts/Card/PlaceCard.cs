@@ -8,8 +8,8 @@ public class PlaceCard : MonoBehaviour
 {
     public GameObject card;
     public List<Transform> positionsList;
+    public ScriptableObjectManager scriptableManager;
     private TurnBasedSystem turnBasedSystem;
-
 
     private void Start()
     {
@@ -20,6 +20,7 @@ public class PlaceCard : MonoBehaviour
         }
 
         turnBasedSystem = GameObject.Find("TurnManager").GetComponent<TurnBasedSystem>();
+        scriptableManager = GetComponent<ScriptableObjectManager>();
     }
 
     public void SpawnCardAtRandomPosition()
@@ -31,7 +32,7 @@ public class PlaceCard : MonoBehaviour
             {
                 if (turnBasedSystem.playerCanPutCard)
                 {
-                    card.GetComponent<Card>().Stats = GetComponent<SpriteLookup>().associatedScriptableObject;
+                    card.GetComponent<Card>().Stats = GetScriptableObject();
 
                     int randomIndex = Random.Range(0, positionsList.Count);
                     if (positionsList[randomIndex].GetComponent<WaypointManager>().IsBusy != true)
@@ -69,6 +70,21 @@ public class PlaceCard : MonoBehaviour
         return true;
     }
 
+    public CardAttributes GetScriptableObject()
+    {
+        GameObject tempGameObject = GameObject.FindGameObjectWithTag("PlayerManager");
+        PlayerBoard tempDeck = tempGameObject.GetComponent<PlayerBoard>();
+        List<CardAttributes> tempListHand = tempDeck.cardsInHand;
+        for (int i = 0; i < tempListHand.Count; ++i)
+        {
+            if (tempListHand[i] == scriptableManager.card)
+            { 
+                return tempListHand[i];
+            };
+        }
+        return null;
+    }
+
     private void ClearDeckHand(GameObject g)
     {
         GameObject tempGameObject = GameObject.FindGameObjectWithTag("PlayerManager");
@@ -79,7 +95,7 @@ public class PlaceCard : MonoBehaviour
         {
             for (int i = 0; i < tempListHand.Count; ++i)
             {
-                if (tempListHand[i] == GetComponent<SpriteLookup>().associatedScriptableObject)
+                if (tempListHand[i] == scriptableManager.card)
                 {
                     tempListHand.RemoveAt(i);
                     tempListBoard.Add(g.GetComponent<Card>());
