@@ -12,7 +12,7 @@ public class CardClick : MonoBehaviour
     private TurnBasedSystem turnBasedSystem;
 
     [Header("UI Preview")]
-    [SerializeField] private GameObject cardPreview;
+    [SerializeField] public GameObject cardPreview;
 
     private PlayerBoard enemyBoard;
 
@@ -33,13 +33,13 @@ public class CardClick : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            // Vérifie si l'objet cliqué possède un collider attaché
+            // Vï¿½rifie si l'objet cliquï¿½ possï¿½de un collider attachï¿½
             if (hit.collider != null)
             {
-                // Vérifie si l'objet cliqué est celui que vous souhaitez interagir
+                // Vï¿½rifie si l'objet cliquï¿½ est celui que vous souhaitez interagir
                 if (hit.collider.gameObject.CompareTag("Card"))
                 {
-                    // L'objet 3D a été cliqué !
+                    // L'objet 3D a ï¿½tï¿½ cliquï¿½ !
                         
                     tempCard = hit.collider.gameObject.GetComponent<Card>();
                    
@@ -49,10 +49,9 @@ public class CardClick : MonoBehaviour
                         if(cardPreview != null)
                         {
                             cardPreview.gameObject.SetActive(true);
-                            cardPreview.GetComponent<GenerateCard>().GenerateCardImage(tempCard.Stats);
+                            cardPreview.GetComponent<GenerateCard>().GenerateCardImage(null, tempCard);
                         }
-
-
+                        
                         if (Input.GetMouseButtonDown(0) && turnBasedSystem.playerCanAttack)
                         {
                             if (originAttack is null)
@@ -115,8 +114,10 @@ public class CardClick : MonoBehaviour
                 }
                 else
                 {
+                    if (tempCard != null)
+                        cardPreview.gameObject.SetActive(false);
+                    
                     tempCard = null;
-                    cardPreview.gameObject.SetActive(false);
                 }
             }
         }

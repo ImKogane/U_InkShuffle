@@ -35,7 +35,7 @@ public class AutoCreateCarousel : MonoBehaviour
         foreach (CardAttributes card in tempList) 
         {
             GameObject tempCardImg = GameObject.Instantiate(cardImgPrefab, carouselContainer.transform);
-            tempCardImg.gameObject.GetComponent<GenerateCard>().GenerateCardImage(card);
+            tempCardImg.gameObject.GetComponent<GenerateCard>().GenerateCardImage(card, null);
             cardImgList.Add(tempCardImg);
 
             tempCardImg.GetComponent<Image>().sprite = tempCardImg.GetComponent<GenerateCard>().cardBackground.GetComponent<Image>().sprite;

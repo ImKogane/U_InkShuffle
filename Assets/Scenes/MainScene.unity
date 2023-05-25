@@ -3496,8 +3496,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6844649480840555514, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
+      propertyPath: m_Name
+      value: CardPreview
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844649480840555514, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844649480840555514, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
+      propertyPath: m_TagString
+      value: CardPreview
       objectReference: {fileID: 0}
     - target: {fileID: 8249135571939600945, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: m_Sprite
@@ -3506,6 +3514,14 @@ PrefabInstance:
     - target: {fileID: 8759398705681810849, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759398705681810851, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759398705681810851, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8759398705681810853, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: m_Pivot.x
@@ -3601,19 +3617,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8759398705895098854, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8759398705895098854, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8759398705895098854, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8759398705895098854, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 95
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 8759398705895098854, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: m_ConstrainProportionsScale

@@ -12,6 +12,7 @@ TagManager:
   - Card
   - IAManager
   - SkipButton
+  - CardPreview
   layers:
   - Default
   - TransparentFX

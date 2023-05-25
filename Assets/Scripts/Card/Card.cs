@@ -13,6 +13,7 @@ public class Card : MonoBehaviour
     public Vector3 CardSize;
 
     private string _name;
+    public string _imagePath;
     private int _pv;
     private int _attack;
     [SerializeField]
@@ -98,9 +99,9 @@ public class Card : MonoBehaviour
         _attack = s._attack;
         _type = s._type;
         _rarity = s._rarity;
+        _imagePath = s._imagePath;
 
-        gameObject.GetComponent<GenerateCard>().GenerateCardImage(s);
-
+        gameObject.GetComponent<GenerateCard>().GenerateCardImage(s, null);
     }
 
 

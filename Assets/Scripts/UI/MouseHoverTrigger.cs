@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,6 +7,12 @@ public class MouseHoverTrigger : MonoBehaviour, IPointerClickHandler, IPointerEn
 {
     [SerializeField] private Image previewImage;
 
+    private GameObject cardPreview;
+
+    private void Start()
+    {
+        cardPreview = Camera.main.GetComponent<CardClick>().cardPreview;
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -14,7 +21,10 @@ public class MouseHoverTrigger : MonoBehaviour, IPointerClickHandler, IPointerEn
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        previewImage.gameObject.SetActive(true);
+        // previewImage.gameObject.SetActive(true);
+
+        cardPreview.gameObject.SetActive(true);
+        cardPreview.GetComponent<GenerateCard>().GenerateCardImage(GetComponent<ScriptableObjectManager>().card, null);
 
         //previewImage.gameObject.GetComponent<GenerateCard>().GenerateCardImage(previewImage.gameObject.GetComponent<ScriptableObjectManager>().card);
         //previewImage.sprite = GetComponent<ScriptableObjectManager>().card._fullImage;
@@ -22,6 +32,7 @@ public class MouseHoverTrigger : MonoBehaviour, IPointerClickHandler, IPointerEn
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        previewImage.gameObject.SetActive(false);
+        cardPreview.gameObject.SetActive(false);
+        // previewImage.gameObject.SetActive(false);
     }
 }
