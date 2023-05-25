@@ -12,7 +12,7 @@ public class CardClick : MonoBehaviour
     private TurnBasedSystem turnBasedSystem;
 
     [Header("UI Preview")]
-    [SerializeField] private GenerateCard cardPreview;
+    [SerializeField] private GameObject cardPreview;
 
     private PlayerBoard enemyBoard;
 
@@ -45,10 +45,13 @@ public class CardClick : MonoBehaviour
                    
                     if (tempCard != null)
                     {
+                        
                         if(cardPreview != null)
                         {
                             cardPreview.gameObject.SetActive(true);
-                            cardPreview.GenerateCardImage(tempCard.Stats);
+
+                            cardPreview.GetComponent<GenerateCard>().GenerateCardImage(tempCard.Stats);
+                            //cardPreview.GenerateCardImage(tempCard.Stats);
                         }
 
 
@@ -119,7 +122,7 @@ public class CardClick : MonoBehaviour
                 else
                 {
                     tempCard = null;
-                    //cardPreview.gameObject.SetActive(false);
+                    cardPreview.gameObject.SetActive(false);
 
                 }
             }

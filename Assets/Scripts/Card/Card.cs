@@ -31,6 +31,12 @@ public class Card : MonoBehaviour
 
     private TurnBasedSystem _turnBasedSystem;
 
+    [Header("Card elements")]
+    [SerializeField] public GameObject cardBackground;
+    [SerializeField] private TextMeshProUGUI lifePointText;
+    [SerializeField] private TextMeshProUGUI atkPointText;
+    [SerializeField] private TextMeshProUGUI nameText;
+
     #endregion
 
     #region Getter&Setter
@@ -113,6 +119,8 @@ public class Card : MonoBehaviour
         _attack = s._attack;
         _type = s._type;
         _rarity = s._rarity;
+
+        gameObject.GetComponent<GenerateCard>().GenerateCardImage(s);
 
     }
 
@@ -199,8 +207,11 @@ public class Card : MonoBehaviour
         }
     }
 
+    
+
+
     #region Animations
-        public void PlayAnimError()
+    public void PlayAnimError()
         {
             Animator animator = GetComponent<Animator>();
 

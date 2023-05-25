@@ -258,6 +258,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 14132119}
   m_CullTransparentMesh: 1
+--- !u!1 &28478774 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6844649480840555514, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
+  m_PrefabInstance: {fileID: 1188545728}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &63867913
 GameObject:
   m_ObjectHideFlags: 0
@@ -2952,7 +2957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f77fef4b3e5d3b44ab2fe7b475e5cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPreview: {fileID: 2788014673588258871, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
+  cardPreview: {fileID: 28478774}
 --- !u!82 &963194230
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3380,6 +3385,14 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 3178524540468339065, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 13.200012
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178524540468339065, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.399994
+      objectReference: {fileID: 0}
     - target: {fileID: 3317120377337223567, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: folderPath
       value: 
@@ -3387,6 +3400,14 @@ PrefabInstance:
     - target: {fileID: 3317120377337223567, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: cardScriptableObjects.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802418210324548821, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -13.600006
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802418210324548821, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.7999878
       objectReference: {fileID: 0}
     - target: {fileID: 6844649480840555514, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: m_IsActive

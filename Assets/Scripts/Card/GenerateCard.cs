@@ -46,8 +46,6 @@ public class GenerateCard : MonoBehaviour
         Sprite sprite = Sprite.Create(imageTexture, new Rect(0, 0, imageTexture.width, imageTexture.height), Vector2.zero);
 
         // Assigner le sprite à un composant SpriteRenderer ou à un autre objet nécessitant un sprite
-        Debug.Log(sprite);
-        Debug.Log(sprite.GetType());
         return sprite;
     }
 }

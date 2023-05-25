@@ -313,6 +313,8 @@ MonoBehaviour:
   slidePrefab: {fileID: 5056388826181530593, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
   slideSpacing: 10
   slideImages: []
+  cardImgPrefab: {fileID: 0}
+  cardImgList: []
 --- !u!1001 &1789884708572485659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -326,11 +328,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3256777749541518436, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3804012893182622050, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4237885057565032057, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
       propertyPath: m_Pivot.x
@@ -422,7 +424,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6517675422545532110, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6517675422545532110, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.7999878
       objectReference: {fileID: 0}
     - target: {fileID: 7686557903072948778, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
       propertyPath: m_Sprite
