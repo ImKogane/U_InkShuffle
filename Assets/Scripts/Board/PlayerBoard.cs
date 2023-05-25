@@ -49,7 +49,7 @@ public class PlayerBoard : MonoBehaviour
             
             if (deck != null)
             {
-                deck.Play(0);
+                deck.SetTrigger("Draw");
                 yield return new WaitForSeconds(0.7f);
             }
             else

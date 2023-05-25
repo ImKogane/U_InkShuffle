@@ -27,6 +27,8 @@ public class TurnBasedSystem : MonoBehaviour
     [Header("User interface")]
     [SerializeField] private TextMeshProUGUI animText;
     [SerializeField] private TextMeshPro turnCount;
+    [SerializeField] private TextMeshPro phaseText;
+    [SerializeField] private UI_EndScreen EndCanvas;
     private Animator animatorText;
 
     private void Start()
@@ -93,6 +95,7 @@ public class TurnBasedSystem : MonoBehaviour
         {
             case playerTurn.PLAYER1:
 
+                UpdatePhaseText("DRAW");
                 StartCoroutine(Player1Board.DrawDeckCard());
 
 
@@ -116,6 +119,7 @@ public class TurnBasedSystem : MonoBehaviour
             case playerTurn.PLAYER1:
 
                 StartCoroutine(UpdateText("FREE PHASE"));
+                UpdatePhaseText("FREE");
                 yield return new WaitForSeconds(2.1f);
 
                 playerCanPutCard = true;
@@ -146,6 +150,7 @@ public class TurnBasedSystem : MonoBehaviour
                 if(Player1Board.cardsOnBoard.Count > 0)
                 {
                     StartCoroutine(UpdateText("ATTACK PHASE"));
+                    UpdatePhaseText("ATTACK");
                     yield return new WaitForSeconds(2.1f);
 
                     playerCanAttack = true;
@@ -202,6 +207,8 @@ public class TurnBasedSystem : MonoBehaviour
 
     private IEnumerator NewPlayerPhase()
     {
+        UpdatePhaseText("");
+
         switch (actualPlayerTurn)
         {
             case playerTurn.PLAYER1:
@@ -245,6 +252,30 @@ public class TurnBasedSystem : MonoBehaviour
         animText.gameObject.SetActive(false);
 
         yield return null;
+    }
+
+    public void UpdatePhaseText(string text)
+    {
+        if(phaseText != null)
+            phaseText.text = text;
+
+    }
+
+    public void WinGame()
+    {
+        if(EndCanvas != null)
+        {
+            Time.timeScale = 0; //Pause game
+
+            EndCanvas.gameObject.SetActive(true);
+            EndCanvas.ShowWin();
+        }
+        
+    }
+
+    public void LoseGame()
+    {
+        Time.timeScale = 0; //Pause game
     }
 
 }

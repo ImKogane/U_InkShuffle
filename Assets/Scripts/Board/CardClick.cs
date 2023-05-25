@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,11 @@ public class CardClick : MonoBehaviour
     Card target;
 
     private TurnBasedSystem turnBasedSystem;
+
+    [Header("UI Preview")]
     [SerializeField] private Image cardPreview;
+    [SerializeField] private TextMeshProUGUI lifePointPreview;
+    [SerializeField] private TextMeshProUGUI atkPointPreview;
 
     private PlayerBoard enemyBoard;
 
@@ -44,8 +49,10 @@ public class CardClick : MonoBehaviour
                     {
                         if(cardPreview != null)
                         {
-                            cardPreview.enabled = true;
+                            cardPreview.gameObject.SetActive(true);
                             cardPreview.sprite = tempCard.Stats._fullImage;
+                            lifePointPreview.text = tempCard.PV.ToString();
+                            atkPointPreview.text = tempCard.Attack.ToString();
                         }
 
 
@@ -61,6 +68,7 @@ public class CardClick : MonoBehaviour
 
                                         if(enemyBoard != null && enemyBoard.cardsOnBoard.Count <= 0)
                                         {
+                                            tempCard.PlayAnimAttack();
                                             enemyBoard.TakeDamage(originAttack.Stats._attack);
 
                                             //Reset
@@ -71,6 +79,7 @@ public class CardClick : MonoBehaviour
                                     }
                                     else
                                     {
+                                        tempCard.PlayAnimError();
                                         Debug.Log("Cette carte ne peux pas/plus attaquer !");
                                     }
                                 }
@@ -82,6 +91,7 @@ public class CardClick : MonoBehaviour
                                 {
                                     if(tempCard.Side == Card.cardSide.AICard)
                                     {
+                                            originAttack.PlayAnimAttack();
                                             target = tempCard;
                                             originAttack.ApplyDamage(target, "IAManager");
 
@@ -104,7 +114,7 @@ public class CardClick : MonoBehaviour
                 else
                 {
                     tempCard = null;
-                    cardPreview.enabled = false;
+                    cardPreview.gameObject.SetActive(false);
                 }
             }
         }

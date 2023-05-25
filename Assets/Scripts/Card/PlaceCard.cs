@@ -85,6 +85,8 @@ public class PlaceCard : MonoBehaviour
                     tempListBoard.Add(g.GetComponent<Card>());
                     AutoCreateCarousel tempUI = FindObjectOfType<AutoCreateCarousel>();
                     tempUI.UpdateCarousel();
+
+                    turnBasedSystem.SkipPhase();
                     break;
                 }
             }

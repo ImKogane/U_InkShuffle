@@ -14,7 +14,6 @@ public class IAPlayer : MonoBehaviour
     private void Start()
     {
         GameObject[] waypoints = GameObject.FindGameObjectsWithTag("IACardPlaces");
-        Debug.Log(waypoints.Length);
 
         foreach (GameObject w in waypoints)
         {
@@ -30,6 +29,8 @@ public class IAPlayer : MonoBehaviour
             {
                 if(playerBoard.cardsOnBoard.Count > 0)
                 {
+                    card.PlayAnimAttack();
+
                     Card randomTarget = playerBoard.cardsOnBoard[Random.Range(0, playerBoard.cardsOnBoard.Count)];
                     card.ApplyDamage(randomTarget, "PlayerManager");
                     Debug.Log("Attaque de l'IA");
