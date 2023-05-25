@@ -27,12 +27,11 @@ toc.title = "Base Game"
 
 toc.notes = "The base game data and features"
 
-toc.version = "0.1"
+toc.version = "1.0"
 
 toc.author = "Groupe3"
 
 toc.filesToLoad = {
-    "exampleAPI",
-    "exampleAPI2",
     "cards",
+    "exampleAPI",
 }

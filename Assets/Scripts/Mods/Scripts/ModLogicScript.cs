@@ -2,6 +2,7 @@
 using System.Security;
 using MoonSharp.Interpreter;
 using UnityEngine;
+using Utilities;
 
 namespace Mods
 {
@@ -26,6 +27,17 @@ namespace Mods
 				_modTable = new Table(this);
 				Globals["ModName"] = _mod.ModName;
 				Globals["ModTable"] = _modTable;
+
+				var toc = _mod.TOCScript.Toc;
+				Globals["GetTocInfo"] = (Producer<string, string>)(key =>
+				{
+					var field = toc.GetType().GetField(key);
+					
+					if (field != null && field.FieldType == typeof(string))
+						return (string) field.GetValue(toc);
+
+					return default;
+				});
 				
 				// Game Namespace TODO
 				// _FullScript.Globals["GetCurrentRound"] = (Func<double>);

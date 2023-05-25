@@ -7,7 +7,7 @@ For all lua files of your mod, the game exposes some global API for you to overw
 Also, you might come to realize that you cannot access the lua "require" function,
 so how do you access your code in other files? that's easy!
 The game gives you two global variables: _G["ModName"]:string and _G["ModTable"]:table (literally)
-and those are shared between all of your lua files. So if you want to access something from another file,
+and *those are shared between all of your lua files*. So if you want to access something from another file,
 make it accessible from the ModTable global variable.
 
 Game API:
@@ -17,13 +17,15 @@ _G = {
     ModName:string,
     ModTable:table,
     
-    GetModInstanceInfo(key:string):any, -- access your TOC information
+    GetTocInfo(key:string):string, -- access your TOC information (except filesToLoad)
     
     GetCurrentRound():number, -- ex: print(GetCurrentRound())
     GetPlayer():userdata
     GetOpponent():userdata
     
     -- the next elements are for you to define, if you want to implement custom logic
+    RegisterCards():table,
+    
     OnModEnabled(),
     OnModDisabled(),
     
@@ -36,16 +38,15 @@ _G = {
 
 function OnModEnabled()
     print("Hey from OnModEnabled")
-    print(table.unpack(ModTable.test2))
-    ModTable.test3 = (ModTable.test3 or 0) + 3
+    print(GetTocInfo("notes"))
 end
 
 function OnModDisabled()
     print("Hey from OnModDisabled")
-    print(ModTable.test3)
 end
 
-print(ModName)
-ModTable.test = (ModTable.test or 0) + 1
+ModTable.test = "This variable is accessible from all of this mod's scripts!"
 
-HelloTest = 2
+print(ModName) -- prints "BaseGame"
+
+-- see the "cards.lua" file to see how new cards are implemented
