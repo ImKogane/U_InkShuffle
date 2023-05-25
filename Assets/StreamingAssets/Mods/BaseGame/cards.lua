@@ -1,23 +1,7 @@
 ﻿local cards = {
     {
-        name = "Bendy",
-        imagePath = "Art/Bendy",
-        hp = 2,
-        attack = 3,
-        type = "NORMAL",
-        rarity = "RARE",
-    },
-    {
-        name = "Angèle",
-        imagePath = "Art/Bendy", --
-        hp = 5,
-        attack = 3,
-        type = "NORMAL",
-        rarity = "EPIC",
-    },
-    {
         name = "Corbak",
-        imagePath = "Art/Bendy", --
+        imagePath = "Art/corback",
         hp = 1,
         attack = 1,
         type = "NORMAL",
@@ -25,7 +9,7 @@
     },
     {
         name = "Ewink",
-        imagePath = "Art/Bendy", --
+        imagePath = "Art/ewink",
         hp = 1,
         attack = 2,
         type = "NORMAL",
@@ -33,15 +17,15 @@
     },
     {
         name = "Gostears",
-        imagePath = "Art/Bendy", --
+        imagePath = "Art/gostears",
         hp = 2,
         attack = 2,
         type = "NORMAL",
         rarity = "COMMON",
     },
     {
-        name = "Hurtook",
-        imagePath = "Art/Bendy", --
+        name = "Hurtouk",
+        imagePath = "Art/hurtouk",
         hp = 2,
         attack = 2,
         type = "NORMAL",
@@ -49,7 +33,7 @@
     },
     {
         name = "Lonelink",
-        imagePath = "Art/Bendy", --
+        imagePath = "Art/lonelink",
         hp = 2,
         attack = 1,
         type = "NORMAL",
@@ -57,7 +41,7 @@
     },
     {
         name = "Panink",
-        imagePath = "Art/Bendy", --
+        imagePath = "Art/panink",
         hp = 3,
         attack = 1,
         type = "NORMAL",
@@ -65,7 +49,7 @@
     },
     {
         name = "Satanink",
-        imagePath = "Art/Bendy", --
+        imagePath = "Art/satanink",
         hp = 2,
         attack = 2,
         type = "NORMAL",
@@ -73,23 +57,15 @@
     },
     {
         name = "Shuffly",
-        imagePath = "Art/Bendy", --
+        imagePath = "Art/shuffly",
         hp = 6,
         attack = 0,
         type = "NORMAL",
         rarity = "EPIC",
     },
     {
-        name = "Socko",
-        imagePath = "Art/Bendy", --
-        hp = 2,
-        attack = 2,
-        type = "NORMAL",
-        rarity = "COMMON",
-    },
-    {
         name = "Zombaxe",
-        imagePath = "Art/Bendy", --
+        imagePath = "Art/zombaxe",
         hp = 2,
         attack = 1,
         type = "NORMAL",
