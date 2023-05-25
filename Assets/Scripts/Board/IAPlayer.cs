@@ -66,7 +66,9 @@ public class IAPlayer : MonoBehaviour
                     {
                         placedCard.GetComponent<Card>().Placed = true;
                         placedCard.GetComponent<Card>().Side = Card.cardSide.AICard;
+                        placedCard.GetComponent<Card>().cardLocation = points[randomPosIndex].GetComponent<WaypointManager>();
                         ownBoard.cardsOnBoard.Add(placedCard.GetComponent<Card>());
+
                         
                     }
 
