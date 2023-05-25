@@ -34,4 +34,5 @@ toc.author = "Groupe3"
 toc.filesToLoad = {
     "exampleAPI",
     "exampleAPI2",
+    "cards",
 }

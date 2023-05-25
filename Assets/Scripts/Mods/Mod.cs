@@ -96,7 +96,7 @@ namespace Mods
 		/// <param name="function">The Lua global function name.</param>
 		/// <param name="args">Additional arguments to send to the Lua function.</param>
 		/// <returns>
-		/// <b>DynValue</b> the return value of the lua function.<br/>
+		/// <b>DynValue</b> the return value of the lua function. Can be Nil.<br/>
 		/// <b>null</b> if the function doesn't exist / an error was thrown.
 		/// </returns>
 		[CanBeNull]
@@ -110,8 +110,8 @@ namespace Mods
 		/// </summary>
 		/// <param name="variable">The Lua global variable name.</param>
 		/// <returns>
-		/// <b>DynValue</b> the value of the lua variable.<br/>
-		/// <b>null</b> if the variable doesn't exist / an error was thrown.
+		/// <b>DynValue</b> the value of the lua variable. Can be Nil.<br/>
+		/// <b>null</b> if an error was thrown.
 		/// </returns>
 		[CanBeNull]
 		public DynValue TryGet(string variable)
