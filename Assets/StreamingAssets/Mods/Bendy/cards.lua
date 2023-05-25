@@ -1,7 +1,7 @@
 ﻿local cards = {
     {
         name = "Bendy",
-        imagePath = "Sprites/Bendy",
+        imagePath = "Art/bendy",
         hp = 2,
         attack = 3,
         type = "NORMAL",
@@ -9,7 +9,7 @@
     },
     {
         name = "Angele",
-        imagePath = "Sprites/Angele",
+        imagePath = "Art/angele",
         hp = 5,
         attack = 3,
         type = "NORMAL",

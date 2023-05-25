@@ -9,7 +9,12 @@ public class AutoCreateCarousel : MonoBehaviour
     public GameObject slidePrefab;
     public float slideSpacing = 10f;
 
+
     public List<Sprite> slideImages;
+
+
+    [SerializeField] private GameObject cardImgPrefab;
+    public List<GameObject> cardImgList;
 
     private void Start()
     {
@@ -27,32 +32,31 @@ public class AutoCreateCarousel : MonoBehaviour
 
     public void UpdateCarousel()
     {
-        slideImages.Clear();
-        GameObject tempGameObject = GameObject.FindGameObjectWithTag("PlayerManager");
-        PlayerBoard tempDeck = tempGameObject.GetComponent<PlayerBoard>();
-        List<CardAttributes> tempList = tempDeck.cardsInHand;
-        foreach (CardAttributes c in tempList)
-        {
-            slideImages.Add(c._fullImage);
-        }
+        cardImgList.Clear();
+        GameObject playerManager = GameObject.FindGameObjectWithTag("PlayerManager");
+        PlayerBoard playerBoard = playerManager.GetComponent<PlayerBoard>();
+
+        List<CardAttributes> tempList = playerBoard.cardsInHand; //Getd es cartes dans la main du joueur
 
         for (int i = carouselContainer.transform.childCount - 1; i >= 0; i--)
         {
             Destroy(carouselContainer.transform.GetChild(i).gameObject);
         }
 
-        foreach (Sprite slideImage in slideImages)
+        foreach (CardAttributes card in tempList) 
         {
-            GameObject slideObject = Instantiate(slidePrefab, carouselContainer.transform);
-            Image slideImageComponent = slideObject.GetComponent<Image>();
-            slideImageComponent.sprite = slideImage;
-            foreach (CardAttributes c in tempList)
+            GameObject tempCardImg = GameObject.Instantiate(cardImgPrefab, carouselContainer.transform);
+            tempCardImg.gameObject.GetComponent<GenerateCard>().GenerateCardImage(card);
+            cardImgList.Add(tempCardImg);
+
+            tempCardImg.GetComponent<Image>().sprite = tempCardImg.GetComponent<GenerateCard>().cardBackground.GetComponent<Image>().sprite;
+
+            if (card._imagePath == tempCardImg.GetComponent<GenerateCard>().path)
             {
-                if(c._fullImage == slideImage)
-                {
-                    slideObject.GetComponent<ScriptableObjectManager>().card = c;
-                }
+                tempCardImg.GetComponent<ScriptableObjectManager>().card = card;
             }
+
         }
+
     }
 }

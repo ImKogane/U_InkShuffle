@@ -3390,7 +3390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6844649480840555514, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8759398705681810849, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: m_Name
@@ -3480,6 +3480,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8759398705895098855, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
+      propertyPath: cardImgPrefab
+      value: 
+      objectReference: {fileID: 5056388826181530593, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
     - target: {fileID: 8866979530227185286, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: m_Enabled
       value: 1

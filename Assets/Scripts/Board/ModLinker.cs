@@ -16,7 +16,7 @@ public class ModLinker : MonoBehaviour
     // do the init in awake, before the board Start
     private void Awake()
     {
-        return; // TODO remove when image path is fixed
+        //return; // TODO remove when image path is fixed
         
         foreach (var mod in ModsManager.Instance.EnumerateEnabledMods())
         {
