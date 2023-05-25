@@ -7,7 +7,6 @@ public class AutoCreateCarousel : MonoBehaviour
 {
     public GameObject carouselContainer;
     public GameObject slidePrefab;
-    public float slideSpacing = 10f;
 
 
     public List<Sprite> slideImages;
@@ -18,16 +17,6 @@ public class AutoCreateCarousel : MonoBehaviour
 
     private void Start()
     {
-        HorizontalLayoutGroup layoutGroup = carouselContainer.AddComponent<HorizontalLayoutGroup>();
-        layoutGroup.spacing = slideSpacing;
-        layoutGroup.childScaleWidth = true; 
-        layoutGroup.childScaleHeight = true;
-        ContentSizeFitter sizeFitter = carouselContainer.AddComponent<ContentSizeFitter>();
-        sizeFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
-        sizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-
-        RectTransform carouselRectTransform = carouselContainer.GetComponent<RectTransform>();
-        carouselRectTransform.anchoredPosition = Vector2.zero;
     }
 
     public void UpdateCarousel()

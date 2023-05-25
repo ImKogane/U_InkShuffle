@@ -364,11 +364,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4237885057565032057, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 650
+      value: 420
       objectReference: {fileID: 0}
     - target: {fileID: 4237885057565032057, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 650
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237885057565032057, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237885057565032057, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237885057565032057, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4237885057565032057, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
       propertyPath: m_LocalPosition.x
@@ -418,6 +430,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4237885057565032057, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5056388826181530593, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
       propertyPath: m_Name
       value: CardImage
@@ -425,10 +441,6 @@ PrefabInstance:
     - target: {fileID: 6517675422545532110, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6517675422545532110, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.7999878
       objectReference: {fileID: 0}
     - target: {fileID: 7686557903072948778, guid: 38a2da83082cd7c45b3260286616d088, type: 3}
       propertyPath: m_Sprite
