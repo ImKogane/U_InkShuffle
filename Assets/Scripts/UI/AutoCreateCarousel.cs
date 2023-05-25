@@ -41,16 +41,18 @@ public class AutoCreateCarousel : MonoBehaviour
             Destroy(carouselContainer.transform.GetChild(i).gameObject);
         }
 
-        float slideWidth = Screen.width * 0.8f;
-        float slideHeight = Screen.height * 0.6f;
-
         foreach (Sprite slideImage in slideImages)
         {
             GameObject slideObject = Instantiate(slidePrefab, carouselContainer.transform);
-            RectTransform slideRectTransform = slideObject.GetComponent<RectTransform>();
-            slideRectTransform.sizeDelta = new Vector2(slideWidth, slideHeight);
             Image slideImageComponent = slideObject.GetComponent<Image>();
             slideImageComponent.sprite = slideImage;
+            foreach (CardAttributes c in tempList)
+            {
+                if(c._fullImage == slideImage)
+                {
+                    slideObject.GetComponent<ScriptableObjectManager>().card = c;
+                }
+            }
         }
     }
 }
