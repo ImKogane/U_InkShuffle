@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class GenerateCard : MonoBehaviour
 {
-    public string path;
 
     [Header("Card elements")]
     [SerializeField] private GameObject cardBorder;
