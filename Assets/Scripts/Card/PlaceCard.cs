@@ -72,9 +72,9 @@ public class PlaceCard : MonoBehaviour
     private void ClearDeckHand(GameObject g)
     {
         GameObject tempGameObject = GameObject.FindGameObjectWithTag("PlayerManager");
-        PlayerBoard tempDeck = tempGameObject.GetComponent<PlayerBoard>();
-        List<CardAttributes> tempListHand = tempDeck.cardsInHand;
-        List<Card> tempListBoard = tempDeck.cardsOnBoard;
+        PlayerBoard tempBoard = tempGameObject.GetComponent<PlayerBoard>();
+        List<CardAttributes> tempListHand = tempBoard.cardsInHand;
+        List<Card> tempListBoard = tempBoard.cardsOnBoard;
         if (g.GetComponent<Card>().Placed == true)
         {
             for (int i = 0; i < tempListHand.Count; ++i)
