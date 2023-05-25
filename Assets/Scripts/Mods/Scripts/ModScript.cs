@@ -9,9 +9,11 @@ namespace Mods
 	public abstract class ModScript : Script
 	{
 		public static readonly string basePath = Application.streamingAssetsPath + "/Mods/";
-		public static readonly string extension = ".lua";
+		public static readonly string scriptExtension = ".lua";
+		public static readonly string imageExtension = ".png";
 		
 		protected Mod _mod;
+		public Mod GetOwningMod() => _mod;
 
 		public ModScript(Mod mod, CoreModules coreModules) : base(coreModules)
 		{
@@ -27,7 +29,7 @@ namespace Mods
 		// Code candy
 		public bool TryDoFile(string fileName)
 		{
-			string fullPath = basePath + _mod.ModName + "/" + fileName + extension;
+			string fullPath = basePath + _mod.ModName + "/" + fileName + scriptExtension;
 			return TryLuaRunner(() => DoString(File.ReadAllText(fullPath)));
 		}
 		
