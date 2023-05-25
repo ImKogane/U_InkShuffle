@@ -544,7 +544,7 @@ Transform:
   m_Children:
   - {fileID: 659964084}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &218216606
 MonoBehaviour:
@@ -3392,6 +3392,14 @@ PrefabInstance:
     - target: {fileID: 2086433780, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3317120377337223567, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
+      propertyPath: folderPath
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3317120377337223567, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
+      propertyPath: cardScriptableObjects.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6844649480840555514, guid: a7083fe6abeee8b4caecef97a60b5fe0, type: 3}
       propertyPath: m_IsActive

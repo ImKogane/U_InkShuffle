@@ -11,8 +11,11 @@ public class SpriteLookup : MonoBehaviour
 
     public CardAttributes associatedScriptableObject;
 
+    private string folderPath = "Assets/ScriptableObjects";
+
     public void Search()
     {
+        FillCardList();
         Sprite currentSprite = GetComponent<Image>().sprite;
 
         foreach (CardAttributes c in cardScriptableObjects)
@@ -25,6 +28,20 @@ public class SpriteLookup : MonoBehaviour
             {
                 continue;
             }
+        }
+    }
+
+    private void FillCardList()
+    {
+        string[] filePaths = AssetDatabase.FindAssets("t:ScriptableObject", new string[] { folderPath });
+
+        foreach (string filePath in filePaths)
+        {
+            string assetPath = AssetDatabase.GUIDToAssetPath(filePath);
+
+            ScriptableObject scriptableObject = AssetDatabase.LoadAssetAtPath<ScriptableObject>(assetPath);
+
+            cardScriptableObjects.Add((CardAttributes)scriptableObject);
         }
     }
 }
