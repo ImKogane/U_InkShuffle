@@ -12,9 +12,7 @@ public class CardClick : MonoBehaviour
     private TurnBasedSystem turnBasedSystem;
 
     [Header("UI Preview")]
-    [SerializeField] private Image cardPreview;
-    [SerializeField] private TextMeshProUGUI lifePointPreview;
-    [SerializeField] private TextMeshProUGUI atkPointPreview;
+    [SerializeField] private GenerateCard cardPreview;
 
     private PlayerBoard enemyBoard;
 
@@ -50,9 +48,7 @@ public class CardClick : MonoBehaviour
                         if(cardPreview != null)
                         {
                             cardPreview.gameObject.SetActive(true);
-                            cardPreview.sprite = tempCard.Stats._fullImage;
-                            lifePointPreview.text = tempCard.PV.ToString();
-                            atkPointPreview.text = tempCard.Attack.ToString();
+                            cardPreview.GenerateCardImage(tempCard.Stats);
                         }
 
 
