@@ -25,13 +25,10 @@ public class Card : MonoBehaviour
     private Rarity _rarity;
     private cardSide _actualCardSide;
 
-    public bool canAttack;
+    [SerializeField] private TextMeshProUGUI lifeText;
+    [SerializeField] private TextMeshProUGUI atkText;
 
-    [Header("Card elements")]
-    [SerializeField] public GameObject cardBackground;
-    [SerializeField] private TextMeshProUGUI lifePointText;
-    [SerializeField] private TextMeshProUGUI atkPointText;
-    [SerializeField] private TextMeshProUGUI nameText;
+    public bool canAttack;
 
     #endregion
 
@@ -132,15 +129,13 @@ public class Card : MonoBehaviour
 
     public void AdaptUI()
     {
-        GameObject LifeText = FindGameObjectInChildWithTag(this.gameObject, "LifePoints");
-        if (LifeText != null)
+        if (lifeText != null)
         {
-            LifeText.GetComponent<TMP_Text>().text = _pv.ToString();
+            lifeText.text = _pv.ToString();
         }
-        GameObject AttackText = FindGameObjectInChildWithTag(this.gameObject, "AttackPoints");
-        if (AttackText != null)
+        if (atkText != null)
         {
-            AttackText.GetComponent<TMP_Text>().text = _attack.ToString();
+            atkText.text = _attack.ToString();
         }
     }
 
