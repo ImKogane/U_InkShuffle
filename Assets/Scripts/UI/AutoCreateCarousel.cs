@@ -43,12 +43,16 @@ public class AutoCreateCarousel : MonoBehaviour
 
         foreach (Sprite slideImage in slideImages)
         {
-            //Instantie une cardImg
             GameObject slideObject = Instantiate(slidePrefab, carouselContainer.transform);
-
-
             Image slideImageComponent = slideObject.GetComponent<Image>();
             slideImageComponent.sprite = slideImage;
+            foreach (CardAttributes c in tempList)
+            {
+                if(c._fullImage == slideImage)
+                {
+                    slideObject.GetComponent<ScriptableObjectManager>().card = c;
+                }
+            }
         }
     }
 }

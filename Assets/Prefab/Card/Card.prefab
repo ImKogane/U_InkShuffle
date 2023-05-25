@@ -360,6 +360,7 @@ GameObject:
   - component: {fileID: 6982130422512627058}
   - component: {fileID: 6982130422512627061}
   - component: {fileID: 6982130422512627056}
+  - component: {fileID: 8516257054498365168}
   - component: {fileID: 198240998}
   - component: {fileID: 7440676292440011724}
   m_Layer: 0
@@ -448,10 +449,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e424c6a9ec7d64ba43b532422e8b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stats: {fileID: 0}
+  Stats: {fileID: 11400000, guid: 7c5916da4d11d1c419492b3fecb4c199, type: 2}
   CardSize: {x: 0.42, y: 1, z: 0.6}
   _isPlaced: 0
   canAttack: 1
+--- !u!114 &8516257054498365168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6982130422512627063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb20a471cad5534d8ae08dd50e34278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card: {fileID: 0}
 --- !u!65 &198240998
 BoxCollider:
   m_ObjectHideFlags: 0

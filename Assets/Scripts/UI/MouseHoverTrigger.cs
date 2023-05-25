@@ -9,7 +9,6 @@ public class MouseHoverTrigger : MonoBehaviour, IPointerClickHandler, IPointerEn
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        GetComponent<SpriteLookup>().Search();
         GetComponent<PlaceCard>().SpawnCardAtRandomPosition();
     }
 
