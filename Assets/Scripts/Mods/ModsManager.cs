@@ -11,6 +11,8 @@ namespace Mods
 	
 	public class ModsManager : LazySingleton<ModsManager>
 	{
+		protected override bool DestroyOnLoad => false;
+		
 		private readonly SortedDictionary<string, Mod> _mods = new();
 		
 		public event Runner OnStartDiscovery;
