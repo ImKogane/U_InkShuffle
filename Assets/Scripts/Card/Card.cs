@@ -13,8 +13,6 @@ public class Card : MonoBehaviour
     public Vector3 CardSize;
 
     private string _name;
-    private Material _cleanImage;
-    private Sprite _fullImage;
     private int _pv;
     private int _attack;
     [SerializeField]
@@ -28,8 +26,6 @@ public class Card : MonoBehaviour
     private cardSide _actualCardSide;
 
     public bool canAttack;
-
-    private TurnBasedSystem _turnBasedSystem;
 
     [Header("Card elements")]
     [SerializeField] public GameObject cardBackground;
@@ -45,16 +41,6 @@ public class Card : MonoBehaviour
     {
         get => _name;
         set => _name = value;
-    }
-    public Material CleanImage
-    {
-        get => _cleanImage;
-        set => _cleanImage = value;
-    }
-    public Sprite FullImage
-    {
-        get => _fullImage;
-        set => _fullImage = value;
     }
     public int PV
     {
@@ -104,17 +90,9 @@ public class Card : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void Init(CardAttributes s)
     {
         _name = s._name;
-        _cleanImage = s._cleanImage;
-        _fullImage = s._fullImage;
         _pv = s._pv;
         _attack = s._attack;
         _type = s._type;
@@ -129,10 +107,8 @@ public class Card : MonoBehaviour
     {
         if(target != null)
         {
-            Debug.Log(_name + " attaque " + target.Stats.name);
             target._pv -= _attack;
             canAttack = false;
-
 
             if (target._pv <= 0)
             {
@@ -148,10 +124,6 @@ public class Card : MonoBehaviour
 
     private void MeshAttributes()
     {
-        if(_cleanImage != null)
-        {
-            GetComponent<Renderer>().material = _cleanImage;
-        }
         if(CardSize != null)
         {
             transform.localScale = CardSize;

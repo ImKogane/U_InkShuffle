@@ -37,15 +37,6 @@ public class PlayerBoard : MonoBehaviour
         GiveStarterCards();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    /// <summary>
-    /// Draw card in deck for player hand
-    /// </summary>
     public IEnumerator DrawDeckCard()
     {
         if(cardsDeck.Count > 0)
@@ -74,10 +65,7 @@ public class PlayerBoard : MonoBehaviour
             {
                 deck.SetActive(false);
             }
-
-
         }
-
         StartCoroutine(turnBasedSystem.FreePhase());
     }
 

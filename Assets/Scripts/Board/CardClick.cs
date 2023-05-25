@@ -49,9 +49,7 @@ public class CardClick : MonoBehaviour
                         if(cardPreview != null)
                         {
                             cardPreview.gameObject.SetActive(true);
-
                             cardPreview.GetComponent<GenerateCard>().GenerateCardImage(tempCard.Stats);
-                            //cardPreview.GenerateCardImage(tempCard.Stats);
                         }
 
 
@@ -86,7 +84,6 @@ public class CardClick : MonoBehaviour
                                     else
                                     {
                                         tempCard.PlayAnimError();
-                                        Debug.Log("Cette carte ne peux pas/plus attaquer !");
                                     }
                                 }
                                 
@@ -107,14 +104,11 @@ public class CardClick : MonoBehaviour
 
 
                                     }
-                                    
                                 }
                                 else
                                 {
-                                    Debug.Log("Tu attaque la même carte !");
                                     ResetAttack();
                                 }
-
                             }
                         }
                     }
@@ -123,7 +117,6 @@ public class CardClick : MonoBehaviour
                 {
                     tempCard = null;
                     cardPreview.gameObject.SetActive(false);
-
                 }
             }
         }

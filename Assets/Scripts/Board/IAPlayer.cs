@@ -30,10 +30,8 @@ public class IAPlayer : MonoBehaviour
                 if(playerBoard.cardsOnBoard.Count > 0)
                 {
                     card.PlayAnimAttack();
-
                     Card randomTarget = playerBoard.cardsOnBoard[Random.Range(0, playerBoard.cardsOnBoard.Count)];
                     card.ApplyDamage(randomTarget, "PlayerManager");
-                    Debug.Log("Attaque de l'IA");
                 }
                 else
                 {
@@ -95,7 +93,6 @@ public class IAPlayer : MonoBehaviour
                 return false;
             }
         }
-
         return true;
     }
 

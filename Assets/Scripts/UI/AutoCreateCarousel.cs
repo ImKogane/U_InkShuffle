@@ -36,7 +36,7 @@ public class AutoCreateCarousel : MonoBehaviour
         GameObject playerManager = GameObject.FindGameObjectWithTag("PlayerManager");
         PlayerBoard playerBoard = playerManager.GetComponent<PlayerBoard>();
 
-        List<CardAttributes> tempList = playerBoard.cardsInHand; //Getd es cartes dans la main du joueur
+        List<CardAttributes> tempList = playerBoard.cardsInHand;
 
         for (int i = carouselContainer.transform.childCount - 1; i >= 0; i--)
         {

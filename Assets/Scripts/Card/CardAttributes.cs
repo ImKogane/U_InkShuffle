@@ -6,8 +6,6 @@ using UnityEngine;
 public class CardAttributes : ScriptableObject
 {
     public string _name;
-    public Material _cleanImage;
-    public Sprite _fullImage;
     public string _imagePath;
     public int _pv;
     public int _attack;
