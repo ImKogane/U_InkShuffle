@@ -10,6 +10,8 @@ The game gives you two global variables: _G["ModName"]:string and _G["ModTable"]
 and *those are shared between all of your lua files*. So if you want to access something from another file,
 make it accessible from the ModTable global variable.
 
+NOTE: Cards have a size of 420px * 600px (width/height)
+
 Game API:
 
 -- everything game-related must be accessible from the global environment.

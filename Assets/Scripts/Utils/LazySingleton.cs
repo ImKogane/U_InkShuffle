@@ -41,8 +41,10 @@ public abstract class LazySingleton<T> : MonoBehaviour where T : LazySingleton<T
         if (_instance == null)
         {
             _instance = (T)this;
+            
             if (!DestroyOnLoad)
                 DontDestroyOnLoad(this);
+            
             SingletonAwake();
         }
         else
