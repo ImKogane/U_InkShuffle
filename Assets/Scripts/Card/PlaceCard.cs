@@ -11,6 +11,8 @@ public class PlaceCard : MonoBehaviour
     public ScriptableObjectManager scriptableManager;
     private TurnBasedSystem turnBasedSystem;
 
+
+
     private void Start()
     {
         GameObject[] waypoints = GameObject.FindGameObjectsWithTag("PlayerCardPlaces");
@@ -44,6 +46,7 @@ public class PlaceCard : MonoBehaviour
                         {
                             placedCard.GetComponent<Card>().Placed = true;
                             placedCard.GetComponent<Card>().Side = Card.cardSide.PlayerCard;
+                            placedCard.GetComponent<Card>().cardLocation = positionsList[randomIndex].GetComponent<WaypointManager>();
                             ClearDeckHand(placedCard);
                         }
                         turnBasedSystem.playerCanPutCard = false;

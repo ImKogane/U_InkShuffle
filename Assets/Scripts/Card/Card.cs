@@ -25,6 +25,8 @@ public class Card : MonoBehaviour
     private Rarity _rarity;
     private cardSide _actualCardSide;
 
+    public WaypointManager cardLocation;
+
     
 
     public bool canAttack;
@@ -155,20 +157,21 @@ public class Card : MonoBehaviour
         return null;
     }
 
-    private void ClearBoard(Card card, string tag)
+    private void ClearBoard(Card target, string tag)
     {
         GameObject tempGameObject = GameObject.FindGameObjectWithTag(tag);
         PlayerBoard tempDeck = tempGameObject.GetComponent<PlayerBoard>();
         List<Card> tempListBoard = tempDeck.cardsOnBoard;
 
-        if (card.Placed == true)
+        if (target.Placed == true)
         {
             for (int i = 0; i < tempListBoard.Count; ++i)
             {
-                if (tempListBoard[i] == card)
+                if (tempListBoard[i] == target)
                 {
                     tempListBoard.RemoveAt(i);
-                    Destroy(card.gameObject);
+                    target.cardLocation.IsBusy = false;
+                    Destroy(target.gameObject);
                     break;
                 }
             }
