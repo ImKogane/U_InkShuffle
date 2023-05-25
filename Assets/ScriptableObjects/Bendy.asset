@@ -15,6 +15,7 @@ MonoBehaviour:
   _name: Bendy
   _cleanImage: {fileID: 2100000, guid: 9224be134d627df42a6c88f9c6f4dc40, type: 2}
   _fullImage: {fileID: 21300000, guid: 1fcfaa95ca02b634f842e2ee4374277f, type: 3}
+  _imagePath: Assets/Cards/Cards Background/bendy_background.png
   _pv: 2
   _attack: 3
   _type: 0

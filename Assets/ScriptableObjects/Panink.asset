@@ -15,6 +15,7 @@ MonoBehaviour:
   _name: Panink
   _cleanImage: {fileID: 2100000, guid: 1b069d25feef2d645b6b786e7d16826d, type: 2}
   _fullImage: {fileID: 21300000, guid: 5364002dd4710d248bfba16005ac1a0b, type: 3}
+  _imagePath: Assets/Cards/Cards Background/panink_background.png
   _pv: 3
   _attack: 1
   _type: 0

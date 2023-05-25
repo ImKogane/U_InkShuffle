@@ -15,6 +15,7 @@ MonoBehaviour:
   _name: Satanink
   _cleanImage: {fileID: 2100000, guid: 682b1d4a8e85bd149967fd25282ea17e, type: 2}
   _fullImage: {fileID: 21300000, guid: 2f8aba83d5c70474da2f8d7a5bc29a15, type: 3}
+  _imagePath: Assets/Cards/Cards Background/satanink_background.png
   _pv: 2
   _attack: 2
   _type: 0

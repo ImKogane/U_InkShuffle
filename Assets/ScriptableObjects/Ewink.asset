@@ -15,6 +15,7 @@ MonoBehaviour:
   _name: Ewink
   _cleanImage: {fileID: 2100000, guid: dc8130d1261c9634daf359204aa25a58, type: 2}
   _fullImage: {fileID: 21300000, guid: 471578601f413a54e8862045d8090699, type: 3}
+  _imagePath: Assets/Cards/Cards Background/ewink_background.png
   _pv: 1
   _attack: 2
   _type: 0

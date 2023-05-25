@@ -119,7 +119,7 @@ public class CardClick : MonoBehaviour
                 else
                 {
                     tempCard = null;
-                    cardPreview.gameObject.SetActive(false);
+                    //cardPreview.gameObject.SetActive(false);
 
                 }
             }

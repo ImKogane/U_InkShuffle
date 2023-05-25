@@ -20,7 +20,7 @@ public class GenerateCard : MonoBehaviour
         atkPointText.text = cardValues._attack.ToString();
         lifePointText.text = cardValues._pv.ToString();
 
-        if(cardBackground != null ) cardBackground.GetComponent<Image>().sprite = SpriteTransform(LoadImageFromFile(cardValues._imagePath));    
+        if(cardBackground == null ) cardBackground.GetComponent<Image>().sprite = SpriteTransform(LoadImageFromFile(cardValues._imagePath));    
     }
 
     private Texture2D LoadImageFromFile(string path)

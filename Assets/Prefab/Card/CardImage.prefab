@@ -277,7 +277,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: bendy
+  m_text: Zombaxe
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e46efd70d9a7b2f4388bea9bdd206cba, type: 2}
   m_sharedMaterial: {fileID: -6315754639890246917, guid: e46efd70d9a7b2f4388bea9bdd206cba, type: 2}
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ffb1da870fff106499aca39a4c995093, type: 2}
   m_sharedMaterial: {fileID: -2738185917173382756, guid: ffb1da870fff106499aca39a4c995093, type: 2}
@@ -684,6 +684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 6982130422512627063, guid: c8ebcb465013d7546b1cb0825a29ee39, type: 3}
   positionsList: []
+  scriptableManager: {fileID: 0}
 --- !u!95 &3268606665733627561
 Animator:
   serializedVersion: 5
@@ -717,7 +718,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7acb56af7d7fb7345ae9bf399e8ed366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardValues: {fileID: 0}
   cardBorder: {fileID: 1508730127478460280}
   cardBackground: {fileID: 8037675567134269101}
   lifePointText: {fileID: 383576051028240707}
@@ -789,7 +789,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9804ca153de398644a9cb369200cc421, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

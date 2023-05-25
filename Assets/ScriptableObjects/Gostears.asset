@@ -15,6 +15,7 @@ MonoBehaviour:
   _name: Gostears
   _cleanImage: {fileID: 2100000, guid: 91dfd1e1b6797a94f99ca7e9e7e2a340, type: 2}
   _fullImage: {fileID: 21300000, guid: b1afad5a130668940ba0b78a651121cd, type: 3}
+  _imagePath: Assets/Cards/Cards Background/gostears_background.png
   _pv: 2
   _attack: 2
   _type: 0
