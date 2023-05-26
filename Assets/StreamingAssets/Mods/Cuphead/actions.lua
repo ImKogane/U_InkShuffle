@@ -26,7 +26,7 @@ function f.processDrawPhase()
 
     for _, card in pairs(player.cardsOnBoard) do
         if card.Name == "Devil" then -- the devil damages the player each turn as long as he is on the terrain
-            player.takeDamage(1)
+            player.TakeDamage(2)
             print("hahahahahaha")
         end
     end
