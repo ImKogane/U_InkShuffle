@@ -328,6 +328,18 @@ public class TurnBasedSystem : MonoBehaviour
         
     }
 
+    public void GameOver()
+    {
+        if (EndCanvas != null)
+        {
+            Time.timeScale = 0; //Pause game
+
+            EndCanvas.gameObject.SetActive(true);
+            EndCanvas.ShowGameOver();
+        }
+
+    }
+
     [MoonSharpHidden]
     public void LoseGame()
     {

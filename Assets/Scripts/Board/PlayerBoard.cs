@@ -106,6 +106,15 @@ public class PlayerBoard : MonoBehaviour
 
         if(lifePoint <= 0)
         {
+
+            if (this.tag == "PlayerManager")
+            {
+                turnBasedSystem.GameOver();
+            }
+            else
+            {
+                turnBasedSystem.WinGame();
+            }
             turnBasedSystem.UpdateText("Defeat");
         }
     }
