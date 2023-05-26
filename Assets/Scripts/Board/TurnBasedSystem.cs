@@ -181,8 +181,8 @@ public class TurnBasedSystem : MonoBehaviour
                 {
                     yield return new WaitForSeconds(0.5f);
 
-                    gameAI.Attack();
-                    EndAttackPhase();
+                    StartCoroutine(gameAI.Attack());
+                    //EndAttackPhase();
                 }
                 else
                 {
