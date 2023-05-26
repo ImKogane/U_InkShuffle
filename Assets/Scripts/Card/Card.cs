@@ -57,27 +57,33 @@ public class Card : MonoBehaviour
         [MoonSharpHidden] set => _attack = value;
     }
 
+    [MoonSharpHidden]
     public bool Placed
     {
         get => _isPlaced;
-        [MoonSharpHidden] set => _isPlaced = value;
+        set => _isPlaced = value;
     }
 
+    [MoonSharpHidden]
     public CardType Type
     {
         get => _type;
-        [MoonSharpHidden] set => _type = value;
+        set => _type = value;
     }
+    
+    [MoonSharpHidden]
     public Rarity CardRarity
     {
         get => _rarity;
-        [MoonSharpHidden] set => _rarity = value;
+        set => _rarity = value;
     }
 
+    
+    [MoonSharpHidden]
     public cardSide Side
     {
         get => _actualCardSide;
-        [MoonSharpHidden] set => _actualCardSide = value;
+        set => _actualCardSide = value;
     }
 
     #endregion
@@ -107,6 +113,7 @@ public class Card : MonoBehaviour
     }
 
 
+    [MoonSharpHidden]
     public void ApplyDamage(Card target, string tag)
     {
         if(target != null)
@@ -123,6 +130,21 @@ public class Card : MonoBehaviour
                 target.AdaptUI();
             }
             
+        }
+    }
+    
+    public void ApplyDamage(int count)
+    {
+        _pv -= count;
+
+        if (_pv <= 0)
+        {
+            ClearBoard(this, "PlayerManager");
+            ClearBoard(this, "IAManager");
+        }
+        else
+        {
+            AdaptUI();
         }
     }
 

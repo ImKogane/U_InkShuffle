@@ -15,8 +15,8 @@ public class PlayerBoard : MonoBehaviour
     [MoonSharpHidden] public bool inAttackPhase;
 
     public List<Card> cardsOnBoard;
-    public List<CardAttributes> cardsInHand;
-    public List<CardAttributes> cardsDeck;
+    [MoonSharpHidden] public List<CardAttributes> cardsInHand;
+    [MoonSharpHidden] public List<CardAttributes> cardsDeck;
 
     [Header("Life system")]
     [SerializeField] private int lifePoint;

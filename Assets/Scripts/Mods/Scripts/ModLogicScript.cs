@@ -39,8 +39,7 @@ namespace Mods
 					return default;
 				});
 				
-				// Game Namespace TODO
-				// _FullScript.Globals["GetCurrentRound"] = (Func<double>);
+				Globals["GetGame"] = (Supplier<TurnBasedSystem>)(() => ModLinker.CurrentGame);
 			}
 		
 		}

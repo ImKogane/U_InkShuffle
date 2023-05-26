@@ -1,11 +1,7 @@
 ﻿local f = {}
 
-local currentGameData
-
-function OnGameAction(actionType, gameData, params) -- Game API
-    currentGameData = gameData
-
-    -- print(actionType, currentGameData.GetTurnNumber(), table.unpack(params))
+function OnGameAction(actionType, params) -- Game API
+    -- print(actionType, GetGame().GetTurnNumber(), table.unpack(params))
 
     if actionType == "PhaseChanged" then
         f.processPhaseChanged(params[1])
@@ -20,10 +16,12 @@ end
 
 function f.processDrawPhase()
     local player = nil
-    if currentGameData.GetTurn() == "PLAYER1" then
-        player = currentGameData.GetPlayer()
-    elseif currentGameData.GetTurn() == "PLAYER2" then
-        player = currentGameData.GetOpponent()
+
+    local currentGame = GetGame()
+    if currentGame.GetTurn() == "PLAYER1" then
+        player = currentGame.GetPlayer()
+    elseif currentGame.GetTurn() == "PLAYER2" then
+        player = currentGame.GetOpponent()
     end
 
     for _, card in pairs(player.cardsOnBoard) do
