@@ -334,6 +334,7 @@ public class TurnBasedSystem : MonoBehaviour
         
     }
 
+    [MoonSharpHidden]
     public void GameOver()
     {
         if (EndCanvas != null)
