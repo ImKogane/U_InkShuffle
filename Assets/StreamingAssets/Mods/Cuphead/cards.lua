@@ -18,10 +18,26 @@
     {
         name = "Dice.K",
         imagePath = "Art/kingDice",
-        hp = 4,
+        hp = 3,
         attack = 4,
         type = "NORMAL",
-        rarity = "RAARE",
+        rarity = "RARE",
+    },
+    {
+        name = "Porkrind",
+        imagePath = "Art/porkrind",
+        hp = 2,
+        attack = 2,
+        type = "NORMAL",
+        rarity = "COMMON",
+    },
+    {
+        name = "Devil",
+        imagePath = "Art/devil",
+        hp = 4,
+        attack = 5,
+        type = "NORMAL",
+        rarity = "EPIC",
     },
 }
 
