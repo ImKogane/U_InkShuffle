@@ -198,8 +198,8 @@ public class TurnBasedSystem : MonoBehaviour
                     yield return new WaitForSeconds(0.5f);
                     ModLinker.OnGameAction(ModLinker.GameAction.PhaseChanged, actualPhase.ToString());
 
-                    gameAI.Attack();
-                    EndAttackPhase();
+                    StartCoroutine(gameAI.Attack());
+                    //EndAttackPhase();
                 }
                 else
                 {

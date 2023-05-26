@@ -11,8 +11,11 @@ public class IAPlayer : MonoBehaviour
     private List<Transform> points = new List<Transform>();
     [SerializeField] private GameObject tempCard;
 
+    private TurnBasedSystem turnBasedSystem;
+
     private void Start()
     {
+        turnBasedSystem = GameObject.Find("TurnManager").GetComponent<TurnBasedSystem>();
         GameObject[] waypoints = GameObject.FindGameObjectsWithTag("IACardPlaces");
 
         foreach (GameObject w in waypoints)
@@ -21,8 +24,10 @@ public class IAPlayer : MonoBehaviour
         }
     }
 
-    public void Attack()
+    public IEnumerator Attack()
     {
+        yield return new WaitForSeconds(0.3f);
+
         foreach (Card card in ownBoard.cardsOnBoard)
         {
             if(card.canAttack) 
@@ -30,15 +35,24 @@ public class IAPlayer : MonoBehaviour
                 if(playerBoard.cardsOnBoard.Count > 0)
                 {
                     card.PlayAnimAttack();
+                    yield return new WaitForSeconds(0.4f);
                     Card randomTarget = playerBoard.cardsOnBoard[Random.Range(0, playerBoard.cardsOnBoard.Count)];
                     card.ApplyDamage(randomTarget, "PlayerManager");
+
+                    
                 }
                 else
                 {
+                    card.PlayAnimAttack();
+                    yield return new WaitForSeconds(0.4f);
                     playerBoard.TakeDamage(card.Stats._attack);
                 }
             }
-        }  
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        turnBasedSystem.EndAttackPhase();
     }
 
     public void PutCard()
