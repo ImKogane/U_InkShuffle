@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using MoonSharp.Interpreter;
 using TMPro;
 using UnityEngine;
 
+[MoonSharpUserData]
 public class TurnBasedSystem : MonoBehaviour
 {
 
@@ -21,8 +23,8 @@ public class TurnBasedSystem : MonoBehaviour
     [SerializeField] private PlayerBoard Player2Board;
 
     [Header("Player permissions")]
-    [SerializeField] public bool playerCanAttack;
-    [SerializeField] public bool playerCanPutCard;
+    [MoonSharpHidden] [SerializeField] public bool playerCanAttack;
+    [MoonSharpHidden] [SerializeField] public bool playerCanPutCard;
 
     [Header("User interface")]
     [SerializeField] private TextMeshProUGUI animText;
@@ -31,7 +33,13 @@ public class TurnBasedSystem : MonoBehaviour
     [SerializeField] private UI_EndScreen EndCanvas;
     private Animator animatorText;
 
-    public bool canSkip;
+    public PlayerBoard GetPlayer() => Player1Board;
+    public PlayerBoard GetOpponent() => Player2Board;
+    public string GetPhase() => actualPhase.ToString();
+    public string GetTurn() => actualPlayerTurn.ToString();
+    public int GetTurnNumber() => turnNumber;
+
+    [MoonSharpHidden] public bool canSkip;
 
     private void Start()
     {
@@ -53,6 +61,7 @@ public class TurnBasedSystem : MonoBehaviour
     }
 
 
+    [MoonSharpHidden]
     public void SkipPhase()
     {
         if (actualPlayerTurn == playerTurn.PLAYER1)
@@ -70,6 +79,7 @@ public class TurnBasedSystem : MonoBehaviour
   
     }
 
+    [MoonSharpHidden]
     public IEnumerator StartNewTurn()
     {
         turnNumber++;
@@ -88,9 +98,11 @@ public class TurnBasedSystem : MonoBehaviour
         DrawPhase();
     }
 
+    [MoonSharpHidden]
     public void DrawPhase()
     {
         actualPhase = turnPhase.DRAW;
+        ModLinker.OnGameAction(ModLinker.GameAction.PhaseChanged, actualPhase.ToString());
 
         switch (actualPlayerTurn)
         {
@@ -112,6 +124,7 @@ public class TurnBasedSystem : MonoBehaviour
         
     }
 
+    [MoonSharpHidden]
     public IEnumerator FreePhase()
     {
         actualPhase = turnPhase.FREE;
@@ -123,6 +136,7 @@ public class TurnBasedSystem : MonoBehaviour
                 StartCoroutine(UpdateText("FREE PHASE"));
                 UpdatePhaseText("FREE");
                 yield return new WaitForSeconds(2.1f);
+                ModLinker.OnGameAction(ModLinker.GameAction.PhaseChanged, actualPhase.ToString());
 
                 canSkip = true;
                 playerCanPutCard = true;
@@ -132,6 +146,7 @@ public class TurnBasedSystem : MonoBehaviour
 
 
                 yield return new WaitForSeconds(0.5f);
+                ModLinker.OnGameAction(ModLinker.GameAction.PhaseChanged, actualPhase.ToString());
               
                 gameAI.PutCard();
 
@@ -147,10 +162,10 @@ public class TurnBasedSystem : MonoBehaviour
         
     }
     
+    [MoonSharpHidden]
     public IEnumerator AttackPhase()
     {
         actualPhase = turnPhase.ATTACK;
-
 
         switch (actualPlayerTurn)
         {
@@ -162,6 +177,7 @@ public class TurnBasedSystem : MonoBehaviour
                     StartCoroutine(UpdateText("ATTACK PHASE"));
                     UpdatePhaseText("ATTACK");
                     yield return new WaitForSeconds(2.1f);
+                    ModLinker.OnGameAction(ModLinker.GameAction.PhaseChanged, actualPhase.ToString());
 
                     
                     playerCanAttack = true;
@@ -180,6 +196,7 @@ public class TurnBasedSystem : MonoBehaviour
                 if (Player2Board.cardsOnBoard.Count > 0)
                 {
                     yield return new WaitForSeconds(0.5f);
+                    ModLinker.OnGameAction(ModLinker.GameAction.PhaseChanged, actualPhase.ToString());
 
                     gameAI.Attack();
                     EndAttackPhase();
@@ -196,6 +213,7 @@ public class TurnBasedSystem : MonoBehaviour
         
     }
 
+    [MoonSharpHidden]
     public void EndAttackPhase()
     {
         canSkip = false;
@@ -213,6 +231,7 @@ public class TurnBasedSystem : MonoBehaviour
         }
     }
 
+    [MoonSharpHidden]
     public void EndTurn()
     { 
         actualPhase = turnPhase.END;
@@ -258,6 +277,7 @@ public class TurnBasedSystem : MonoBehaviour
 
     }
 
+    [MoonSharpHidden]
     public IEnumerator UpdateText(string text)
     {
         animText.gameObject.SetActive(true);
@@ -271,12 +291,15 @@ public class TurnBasedSystem : MonoBehaviour
         yield return null;
     }
 
+    [MoonSharpHidden]
     public void UpdatePhaseText(string text)
     {
         if(phaseText != null)
             phaseText.text = text;
 
     }
+    
+    [MoonSharpHidden]
     public void UpdateMidText(string text)
     {
         if (turnCount != null)
@@ -284,6 +307,7 @@ public class TurnBasedSystem : MonoBehaviour
 
     }
 
+    [MoonSharpHidden]
     public void ResetMidText()
     {
         if (turnCount != null)
@@ -291,7 +315,7 @@ public class TurnBasedSystem : MonoBehaviour
 
     }
 
-
+    [MoonSharpHidden]
     public void WinGame()
     {
         if(EndCanvas != null)
@@ -304,6 +328,7 @@ public class TurnBasedSystem : MonoBehaviour
         
     }
 
+    [MoonSharpHidden]
     public void LoseGame()
     {
         Time.timeScale = 0; //Pause game

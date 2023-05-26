@@ -8,4 +8,5 @@ toc.author = "Matthias.H"
 
 toc.filesToLoad = {
     "cards",
+    "actions",
 }

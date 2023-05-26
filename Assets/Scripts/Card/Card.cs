@@ -1,19 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MoonSharp.Interpreter;
 using TMPro;
 using UnityEngine;
 
+[MoonSharpUserData]
 public class Card : MonoBehaviour
 {
     #region Variables
 
     [SerializeField]
-    public CardAttributes Stats;
-    public Vector3 CardSize;
+    [MoonSharpHidden] public CardAttributes Stats;
+    [MoonSharpHidden] public Vector3 CardSize;
 
     private string _name;
-    public string _imagePath;
+    [MoonSharpHidden] public string _imagePath;
     private int _pv;
     private int _attack;
     [SerializeField]
@@ -26,11 +28,11 @@ public class Card : MonoBehaviour
     private Rarity _rarity;
     private cardSide _actualCardSide;
 
-    public WaypointManager cardLocation;
+    [MoonSharpHidden] public WaypointManager cardLocation;
 
     
 
-    public bool canAttack;
+    [MoonSharpHidden] public bool canAttack;
 
     [SerializeField] private TextMeshProUGUI lifeText;
     [SerializeField] private TextMeshProUGUI atkText;
@@ -42,40 +44,40 @@ public class Card : MonoBehaviour
     public string Name
     {
         get => _name;
-        set => _name = value;
+        [MoonSharpHidden] set => _name = value;
     }
     public int PV
     {
         get => _pv;
-        set => _pv = value;
+        [MoonSharpHidden] set => _pv = value;
     }
     public int Attack
     {
         get => _attack;
-        set => _attack = value;
+        [MoonSharpHidden] set => _attack = value;
     }
 
     public bool Placed
     {
         get => _isPlaced;
-        set => _isPlaced = value;
+        [MoonSharpHidden] set => _isPlaced = value;
     }
 
     public CardType Type
     {
         get => _type;
-        set => _type = value;
+        [MoonSharpHidden] set => _type = value;
     }
     public Rarity CardRarity
     {
         get => _rarity;
-        set => _rarity = value;
+        [MoonSharpHidden] set => _rarity = value;
     }
 
     public cardSide Side
     {
         get => _actualCardSide;
-        set => _actualCardSide = value;
+        [MoonSharpHidden] set => _actualCardSide = value;
     }
 
     #endregion
@@ -132,6 +134,7 @@ public class Card : MonoBehaviour
         }
     }
 
+    [MoonSharpHidden]
     public void AdaptUI()
     {
         if (lifeText != null)
@@ -184,6 +187,7 @@ public class Card : MonoBehaviour
 
 
     #region Animations
+    [MoonSharpHidden]
     public void PlayAnimError()
         {
             Animator animator = GetComponent<Animator>();
@@ -194,6 +198,7 @@ public class Card : MonoBehaviour
             }
         }
 
+    [MoonSharpHidden]
         public void PlayAnimAttack()
         {
             Animator animator = GetComponent<Animator>();

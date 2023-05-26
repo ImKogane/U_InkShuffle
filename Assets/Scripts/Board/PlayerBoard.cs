@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoonSharp.Interpreter;
 using TMPro;
 using UnityEngine;
 
+[MoonSharpUserData]
 public class PlayerBoard : MonoBehaviour
 {
     private TurnBasedSystem turnBasedSystem;
@@ -10,7 +12,7 @@ public class PlayerBoard : MonoBehaviour
     
     [SerializeField] private AutoCreateCarousel PlayerUI;
 
-    public bool inAttackPhase;
+    [MoonSharpHidden] public bool inAttackPhase;
 
     public List<Card> cardsOnBoard;
     public List<CardAttributes> cardsInHand;
@@ -37,6 +39,7 @@ public class PlayerBoard : MonoBehaviour
         GiveStarterCards();
     }
 
+    [MoonSharpHidden]
     public IEnumerator DrawDeckCard()
     {
         if(cardsDeck.Count > 0)
@@ -68,7 +71,7 @@ public class PlayerBoard : MonoBehaviour
         }
         StartCoroutine(turnBasedSystem.FreePhase());
     }
-
+    
     void ShuffleDeck<T>(List<T> list)
     {
         int count = list.Count;

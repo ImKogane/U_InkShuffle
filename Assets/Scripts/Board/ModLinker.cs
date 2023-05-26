@@ -5,6 +5,7 @@ using System.Linq;
 using Mods;
 using MoonSharp.Interpreter;
 using UnityEngine;
+using Utilities;
 
 public class ModLinker : MonoBehaviour
 {
@@ -12,6 +13,23 @@ public class ModLinker : MonoBehaviour
     public PlayerBoard PlayerBoard;
 
     private List<CardAttributes> _generatedDeck = new();
+
+    public enum GameAction
+    {
+        PhaseChanged,
+        CardPlaced,
+        CardAttacking,
+        CardAttacked,
+    }
+    
+    public static void OnGameAction(GameAction gameAction, params object[] args){
+        var turnBasedSystem = GameObject.Find("TurnManager").GetComponent<TurnBasedSystem>();
+        
+        foreach (var mod in ModsManager.Instance.EnumerateEnabledMods())
+        {
+            mod.TryCall("OnGameAction", gameAction.ToString(), turnBasedSystem, args);
+        }
+    }
 
     // do the init in awake, before the board Start
     private void Awake()
