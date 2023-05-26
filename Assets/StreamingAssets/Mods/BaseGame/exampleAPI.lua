@@ -18,23 +18,40 @@ Game API:
 _G = {
     ModName:string,
     ModTable:table,
-    
+
     GetTocInfo(key:string):string, -- access your TOC information (except filesToLoad)
-    
-    GetCurrentRound():number, -- ex: print(GetCurrentRound())
-    GetPlayer():userdata
-    GetOpponent():userdata
-    
+
+    GetGame():userdata, -- access the full game systems and API for the current game, usable in OnGameAction
+
     -- the next elements are for you to define, if you want to implement custom logic
+
     RegisterCards():table,
-    
+
     OnModEnabled(),
     OnModDisabled(),
-    
-    OnStartRound(),
-    OnEndRound(),
-    ...
+
+    OnGameAction(actionType:string, params:table) -- called each time an action happens in the game, params depends on the actionType
 }
+
+actionType:
+    - "PhaseChanged" params[1] = ( "DRAW", "FREE", "ATTACK" )
+
+GetGame() API:
+    - GetPlayer():player
+    - GetOpponent():player
+    - GetPhase():string ( "DRAW", "FREE", "ATTACK" )
+    - GetTurn():string ( "PLAYER1", "PLAYER2" )
+    - GetCurrentRound():number
+
+player API:
+    - TakeDamage(amount:number)
+    - cardsOnBoard:table (of cards, see below)
+
+card API:
+    - Name:string
+    - PV:number
+    - Attack:number
+    - ApplyDamage(count:number)
 
 ]]
 

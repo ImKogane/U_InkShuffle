@@ -14,6 +14,8 @@ public class ModLinker : MonoBehaviour
 
     private List<CardAttributes> _generatedDeck = new();
 
+    public static TurnBasedSystem CurrentGame;
+
     public enum GameAction
     {
         PhaseChanged,
@@ -22,20 +24,17 @@ public class ModLinker : MonoBehaviour
         CardAttacked,
     }
     
-    public static void OnGameAction(GameAction gameAction, params object[] args){
-        var turnBasedSystem = GameObject.Find("TurnManager").GetComponent<TurnBasedSystem>();
-        
+    public static void OnGameAction(GameAction gameAction, params object[] args)
+    {
         foreach (var mod in ModsManager.Instance.EnumerateEnabledMods())
         {
-            mod.TryCall("OnGameAction", gameAction.ToString(), turnBasedSystem, args);
+            mod.TryCall("OnGameAction", gameAction.ToString(), args);
         }
     }
 
     // do the init in awake, before the board Start
     private void Awake()
     {
-        //return; // TODO remove when image path is fixed
-        
         foreach (var mod in ModsManager.Instance.EnumerateEnabledMods())
         {
             DynValue cardsTable = mod.TryCallR("RegisterCards");

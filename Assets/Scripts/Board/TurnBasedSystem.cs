@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -37,9 +38,14 @@ public class TurnBasedSystem : MonoBehaviour
     public PlayerBoard GetOpponent() => Player2Board;
     public string GetPhase() => actualPhase.ToString();
     public string GetTurn() => actualPlayerTurn.ToString();
-    public int GetTurnNumber() => turnNumber;
+    public int GetCurrentRound() => turnNumber;
 
     [MoonSharpHidden] public bool canSkip;
+
+    private void Awake()
+    {
+        ModLinker.CurrentGame = this;
+    }
 
     private void Start()
     {
